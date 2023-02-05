@@ -1,15 +1,37 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root from './routes/Root';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import ErrorPage from './error-page';
+import Udvidelser from './routes/Udvidelser';
+import Hjem from './routes/Hjem';
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root/>,
+        errorElement: <ErrorPage />,
+        children:[
+            {
+                path:'udvidelser/',
+                element: <Udvidelser/>
+            },
+            {
+                path:'hjem/',
+                element: <Hjem/>
+            }
+        ]
+    },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <RouterProvider router={router}/>
+    </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
