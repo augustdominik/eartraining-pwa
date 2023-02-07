@@ -1,7 +1,7 @@
 import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import * as Tone from 'tone';
-import { Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { Button, FormControlLabel, Checkbox } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
 
@@ -49,10 +49,15 @@ function Udvidelser() {
 
     //dominant and tonic
     const [chords, setChords] = React.useState(ChordGenerator.getDominantAndTonic);
+    const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant());
     const [extensions, setExtensions] = React.useState([]);
 
     const getNewChords = () => {
         setChords(ChordGenerator.getDominantAndTonic());
+    }
+
+    const getNewDominantChord = () => {
+        setDominantChord(ChordGenerator.getRandomDominant());
     }
 
     const getExtensions = (_extensions) => {
@@ -61,38 +66,22 @@ function Udvidelser() {
     }
 
     const playDominantChord = () => {
-        sampler.triggerAttackRelease(chords[0], '2n');
-        getExtensions(['b9']);
+        sampler.triggerAttackRelease(dominantChord,'2n');
     };
 
     const playTonicChord = () => {
         sampler.triggerAttackRelease(chords[1], '2n');
     };
 
-    const handleChange = (event, num) => {
-        
-    }
 
     return (
         <div className="udvidelser">
-            <h2>Udvidelser på dominanten!!</h2>
-            <div className='checkboxes'>
-                <div className='checkBoxGroup'>
-                 <FormControlLabel control={<Checkbox />} label="b9 - le"/>
-                 <FormControlLabel control={<Checkbox />} label="9 - la"/>
-                 <FormControlLabel control={<Checkbox />} label="#9 - li"/>
-                </div>
-                 <FormControlLabel control={<Checkbox />} label="#11 - di"/>
-                <div className='checkBoxGroup'>
-                 <FormControlLabel control={<Checkbox />} label="b13 - me"/>
-                 <FormControlLabel control={<Checkbox />} label="13 - mi"/>
-                </div>
-            </div>
+            <h2>Hvad hører du?</h2>
             <div className='chordButtons'>
                 <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon/>}>Dominant</Button>
-                <Button variant='contained' onPointerDown={playTonicChord} endIcon={<VolumeUpIcon/>}>Tonika</Button>
             </div>
-            <Button variant='contained' onPointerDown={getNewChords}>Ny Akkord</Button>
+            <Button variant='contained' onPointerDown={getNewDominantChord}>Næste Dominant</Button>
+            <p>{dominantChord}</p>
         </div>
     );
 }
