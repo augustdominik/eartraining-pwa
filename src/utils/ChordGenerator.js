@@ -1,6 +1,6 @@
 import { Note } from 'tonal';
 
-const dominantChords = {
+export const dominantChords = {
     seventh: {
         voicings:[['C2', 'Bb2', 'E3']],
         chordSymbol:'7'
@@ -27,11 +27,11 @@ const dominantChords = {
     },
     flatThirteenth: {
         voicings:[['C2', 'Bb2', 'E3', 'Ab3']],
-        chordSynbol:'b13'
+        chordSymbol:'b13'
     },
     thirteenthFlatNinth: {
         voicings:[['C2', 'Bb2', 'Db3', 'E3', 'A3']],
-        chordSymbol:'b13b9'
+        chordSymbol:'13b9'
     },
     flatThirteenthFlatNinth: {
         voicings:[['C2', 'Bb2', 'Db3', 'E3', 'Ab3']],

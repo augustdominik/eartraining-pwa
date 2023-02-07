@@ -1,8 +1,16 @@
 .udvidelser{
-    max-width: 400px;
-    padding: 16px 32px;
     display: flex;
     flex-direction: column;
+}
+
+.answerButtons{
+    display: grid;
+}
+
+.footer{
+   display:flex;
+   justify-content: space-between;
+   margin-top: auto;
 }
 
 .checkboxes{

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import * as Tone from 'tone';
-import { Button, FormControlLabel, Checkbox } from '@mui/material';
+import { Button, FormControlLabel, Checkbox, Paper } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
 
@@ -61,27 +63,53 @@ function Udvidelser() {
     }
 
     const getExtensions = (_extensions) => {
-        setExtensions(ChordGenerator.getExtensions(chords[0],_extensions));
+        setExtensions(ChordGenerator.getExtensions(chords[0], _extensions));
         console.log(extensions)
     }
 
     const playDominantChord = () => {
-        sampler.triggerAttackRelease(dominantChord,'2n');
+        sampler.triggerAttackRelease(dominantChord, '2n');
     };
 
     const playTonicChord = () => {
         sampler.triggerAttackRelease(chords[1], '2n');
     };
 
+    const answer = (answerString) => {
+        console.log(answerString);
+    }
+
+    const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName,i) => 
+        <Button 
+            className='answerButton'
+            variant='contained'
+            onClick={() => answer(ChordGenerator.dominantChords[keyName].chordSymbol)}
+        >
+            {ChordGenerator.dominantChords[keyName].chordSymbol}
+        </Button>
+    );
+
 
     return (
         <div className="udvidelser">
-            <h2>Hvad hører du?</h2>
-            <div className='chordButtons'>
-                <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon/>}>Dominant</Button>
+
+            <div className='content'>
+                <h2>Hvad hører du?</h2>
+                <div className='chordButtons'>
+                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Dominant</Button>
+                </div>
+                <div className='guessButtons'>
+                    {answerButtons}
+                </div>
+                <p>{dominantChord}</p>
             </div>
-            <Button variant='contained' onPointerDown={getNewDominantChord}>Næste Dominant</Button>
-            <p>{dominantChord}</p>
+            
+            
+            <Paper elevation={1} className='footer'>
+                <Button variant='contained' onPointerDown={getNewDominantChord} startIcon={<NavigateBeforeIcon/>}>Forrige</Button>
+                <p>8/10</p>
+                <Button variant='contained' onPointerDown={getNewDominantChord} endIcon={<NavigateNextIcon/>}>Næste</Button>
+            </Paper>
         </div>
     );
 }
