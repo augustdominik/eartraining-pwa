@@ -50,29 +50,14 @@ const sampler = new Tone.Sampler({
 function Udvidelser() {
 
     //dominant and tonic
-    const [chords, setChords] = React.useState(ChordGenerator.getDominantAndTonic);
     const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant());
-    const [extensions, setExtensions] = React.useState([]);
-
-    const getNewChords = () => {
-        setChords(ChordGenerator.getDominantAndTonic());
-    }
 
     const getNewDominantChord = () => {
         setDominantChord(ChordGenerator.getRandomDominant());
     }
 
-    const getExtensions = (_extensions) => {
-        setExtensions(ChordGenerator.getExtensions(chords[0], _extensions));
-        console.log(extensions)
-    }
-
     const playDominantChord = () => {
         sampler.triggerAttackRelease(dominantChord, '2n');
-    };
-
-    const playTonicChord = () => {
-        sampler.triggerAttackRelease(chords[1], '2n');
     };
 
     const answer = (answerString) => {
@@ -98,15 +83,15 @@ function Udvidelser() {
                 <div className='chordButtons'>
                     <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Dominant</Button>
                 </div>
-                <div className='guessButtons'>
+                <div className='answerButtons'>
                     {answerButtons}
                 </div>
                 <p>{dominantChord}</p>
             </div>
             
             
-            <Paper elevation={1} className='footer'>
-                <Button variant='contained' onPointerDown={getNewDominantChord} startIcon={<NavigateBeforeIcon/>}>Forrige</Button>
+            <Paper elevation={2} className='footer'>
+                <Button variant='contained' onPointerDown={getNewDominantChord} startIcon={<NavigateBeforeIcon/>}>Giv op</Button>
                 <p>8/10</p>
                 <Button variant='contained' onPointerDown={getNewDominantChord} endIcon={<NavigateNextIcon/>}>Næste</Button>
             </Paper>

@@ -1,16 +1,22 @@
 .udvidelser{
     display: flex;
+    flex:1;
+    align-self: stretch;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .answerButtons{
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    grid-gap: 2em;
 }
+
 
 .footer{
    display:flex;
    justify-content: space-between;
-   margin-top: auto;
 }
 
 .checkboxes{
