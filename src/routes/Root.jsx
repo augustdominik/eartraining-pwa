@@ -54,6 +54,14 @@ function Root() {
                         <ListItemText primary={'Udvidelser På Dominanten'} />
                     </ListItemButton>
                 </ListItem>
+                <ListItem disablePadding component={Link} to='/Udvidelser'>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            {<InboxIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={'Solfachef'} />
+                    </ListItemButton>
+                </ListItem>
             </List>
             <Divider />
             <List>

@@ -3,39 +3,39 @@ import { Note } from 'tonal';
 export const dominantChords = {
     seventh: {
         voicings:[['C2', 'Bb2', 'E3']],
-        chordSymbol:'7'
+        symbol:'7'
     },
     ninth: {
         voicings:[['C2', 'Bb2', 'E3', 'D3']],
-        chordSymbol:'9'
+        symbol:'9'
     },
     flatNinth: {
         voicings:[['C2', 'Bb2', 'E3', 'Db3']],
-        chordSymbol:'b9'
+        symbol:'b9'
     },
     sharpNinth: {
         voicings:[['C2', 'Bb2', 'E3', 'D#4']],
-        chordSymbol:'#9'
+        symbol:'#9'
     },
     sharpEleventh: {
         voicings:[['C2', 'Bb2', 'E3', 'F#3']],
-        chordSymbol:'#11'
+        symbol:'#11'
     },
     thirteenth: {
         voicings:[['C2', 'Bb2', 'E3', 'A3']],
-        chordSymbol:'13'
+        symbol:'13'
     },
     flatThirteenth: {
         voicings:[['C2', 'Bb2', 'E3', 'Ab3']],
-        chordSymbol:'b13'
+        symbol:'b13'
     },
     thirteenthFlatNinth: {
         voicings:[['C2', 'Bb2', 'Db3', 'E3', 'A3']],
-        chordSymbol:'13b9'
+        symbol:'13b9'
     },
     flatThirteenthFlatNinth: {
         voicings:[['C2', 'Bb2', 'Db3', 'E3', 'Ab3']],
-        chordSymbol:'b13b9'
+        symbol:'b13b9'
     }
 }
 
@@ -54,11 +54,10 @@ function transposeChord(chord, semitones){
 export function getRandomDominant(){
 
     const keys = Object.keys(dominantChords);
-    const chord = dominantChords[keys[Math.floor(keys.length * Math.random())]].voicings[0];
+    var chord = dominantChords[keys[Math.floor(keys.length * Math.random())]];
     const transposeBySemitones = 6 + Math.floor(Math.random() * 12); //Added the sixth because the original voicings are way too low
-    const transposedChord = transposeChord(chord, transposeBySemitones);
-
-    return transposedChord;
+    chord.voicings.forEach(voicing => voicing = transposeChord(voicing,transposeBySemitones));
+    return chord;
 }
 
 export function getDominantAndTonic(){

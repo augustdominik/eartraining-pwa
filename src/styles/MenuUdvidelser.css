@@ -1,0 +1,26 @@
+.menu-udvidelser{
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.slider{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 60%;
+}
+
+
+.slider-num-answers{
+    width: 50%;
+}

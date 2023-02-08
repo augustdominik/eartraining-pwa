@@ -1,101 +1,62 @@
 import * as React from 'react';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import * as Tone from 'tone';
-import { Button, FormControlLabel, Checkbox, Paper } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
+import MenuUdvidelser from '../components/MenuUdvidelser';
+import QuizUdvidelser from '../components/QuizUdvidelser';
 
-// PIANO SAMPLER
-const sampler = new Tone.Sampler({
-    urls: {
-        A0: "A0.mp3",
-        C1: "C1.mp3",
-        "D#1": "Ds1.mp3",
-        "F#1": "Fs1.mp3",
-        A1: "A1.mp3",
-        C2: "C2.mp3",
-        "D#2": "Ds2.mp3",
-        "F#2": "Fs2.mp3",
-        A2: "A2.mp3",
-        C3: "C3.mp3",
-        "D#3": "Ds3.mp3",
-        "F#3": "Fs3.mp3",
-        A3: "A3.mp3",
-        C4: "C4.mp3",
-        "D#4": "Ds4.mp3",
-        "F#4": "Fs4.mp3",
-        A4: "A4.mp3",
-        C5: "C5.mp3",
-        "D#5": "Ds5.mp3",
-        "F#5": "Fs5.mp3",
-        A5: "A5.mp3",
-        C6: "C6.mp3",
-        "D#6": "Ds6.mp3",
-        "F#6": "Fs6.mp3",
-        A6: "A6.mp3",
-        C7: "C7.mp3",
-        "D#7": "Ds7.mp3",
-        "F#7": "Fs7.mp3",
-        A7: "A7.mp3",
-        C8: "C8.mp3"
-    },
+function generateQuestions(amount){
+    var questions = [];
 
-    release: 10,
+    for(var i = 0; i < amount; i++){
+        const question = {};
+        const chord = ChordGenerator.getRandomDominant();
+        question.chord = chord;
+        question.aswer = question.chord.symbol; 
+        question.quess = '';
+        questions.push(question);
+    }
 
-    baseUrl: "https://tonejs.github.io/audio/salamander/"
-}).toDestination();
+    return questions;
+}
 
 function Udvidelser() {
 
-    //dominant and tonic
-    const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant());
+    //--Menu før quiz
+    //En bool til at se, hvorvidt quizzen er startet.
+    //Et inputfelt til at indtaste, hvor mange spørgsmål vi vil have
+    //En startknap, der sætter den ovenstående bool til true
+    //--Quiz
+    // vi skal bruge en form for game function
+    //
+    //--Evaluering
 
-    const getNewDominantChord = () => {
-        setDominantChord(ChordGenerator.getRandomDominant());
+    //const [quizInProgress, setQuizInProgress] = React.useState(false);
+    //const [evaluationInProgress, setEvaluationInProgress] = React.useState(false);
+
+    //states include: menu, quiz, evaluation
+    const [curState, setState] = React.useState('menu');
+    const [questions, setQuestions] = React.useState();
+
+    const startQuiz = (numQuestions) => {
+        setQuestions(generateQuestions(numQuestions));
+        setState('quiz');
     }
 
-    const playDominantChord = () => {
-        sampler.triggerAttackRelease(dominantChord, '2n');
-    };
+    const renderState = (_state) => {
 
-    const answer = (answerString) => {
-        console.log(answerString);
+        if (_state === 'menu') {
+            return (<MenuUdvidelser startQuiz={startQuiz} />);
+        } else if (_state === 'quiz') {
+            return (<QuizUdvidelser questions={questions} setQuestions={() => setQuestions}/> );
+        } else if (_state === 'evaluation') {
+
+        } else {
+            return (<MenuUdvidelser />);
+        }
     }
-
-    const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName,i) => 
-        <Button 
-            className='answerButton'
-            variant='contained'
-            onClick={() => answer(ChordGenerator.dominantChords[keyName].chordSymbol)}
-        >
-            {ChordGenerator.dominantChords[keyName].chordSymbol}
-        </Button>
-    );
-
 
     return (
-        <div className="udvidelser">
-
-            <div className='content'>
-                <h2>Hvad hører du?</h2>
-                <div className='chordButtons'>
-                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Dominant</Button>
-                </div>
-                <div className='answerButtons'>
-                    {answerButtons}
-                </div>
-                <p>{dominantChord}</p>
-            </div>
-            
-            
-            <Paper elevation={2} className='footer'>
-                <Button variant='contained' onPointerDown={getNewDominantChord} startIcon={<NavigateBeforeIcon/>}>Giv op</Button>
-                <p>8/10</p>
-                <Button variant='contained' onPointerDown={getNewDominantChord} endIcon={<NavigateNextIcon/>}>Næste</Button>
-            </Paper>
-        </div>
+        renderState(curState)
     );
 }
 
