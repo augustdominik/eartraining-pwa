@@ -11,8 +11,8 @@ function generateQuestions(amount){
         const question = {};
         const chord = ChordGenerator.getRandomDominant();
         question.chord = chord;
-        question.aswer = question.chord.symbol; 
-        question.quess = '';
+        question.answer = question.chord.symbol; 
+        question.guess = '';
         questions.push(question);
     }
 
@@ -35,7 +35,7 @@ function Udvidelser() {
         if (_state === 'menu') {
             return (<MenuUdvidelser startQuiz={startQuiz} />);
         } else if (_state === 'quiz') {
-            return (<QuizUdvidelser questions={questions} setQuestions={() => setQuestions}/> );
+            return (<QuizUdvidelser questions={questions} setQuestions={() => setQuestions} setState={setState}/> );
         } else if (_state === 'evaluation') {
 
         } else {

@@ -47,55 +47,95 @@ const sampler = new Tone.Sampler({
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
 
-function QuizUdvidelser({questions, setQuestions}) {
+
+function QuizUdvidelser({questions, setQuestions, setState}) {
 
     //dominant and tonic
     const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant().voicings[0]);
+    const [curQuestion, setCurQuestion] = React.useState(1);
+    const [questionAnswered, setQuestionAnswered] = React.useState(false);
 
     const getNewDominantChord = () => {
         setDominantChord(ChordGenerator.getRandomDominant().voicings[0]);
     }
 
     const playDominantChord = () => {
-        sampler.triggerAttackRelease(dominantChord, '2n');
-        console.log(dominantChord);
+        sampler.triggerAttackRelease(questions[curQuestion - 1].chord.voicings[0], '2n');
     };
 
+    const nextQuestion = () => {
+        if(curQuestion >= questions.length){
+            setState('menu');
+        } else {
+            setQuestionAnswered(false);
+            setCurQuestion(curQuestion + 1);
+        }
+    }
+
     const answer = (answerString) => {
-        console.log(answerString);
+        setQuestions(questions[curQuestion].guess = answerString);
+        setQuestionAnswered(true);
+    }
+
+    const getButtonColor = (symbol) =>{
+        if(questionAnswered){
+            if(symbol === questions[curQuestion].answer){
+                return 'success';
+            }else{
+                return 'error';
+            }
+        }else{
+            return 'primary';
+        }
+    }
+
+    const getButtonVariant = (symbol) =>{
+        if(questionAnswered){
+            if(symbol === questions[curQuestion].answer || symbol === questions[curQuestion].guess){
+                return 'contained';
+            }else {
+                return 'outlined';
+            }
+        }else{
+            return 'outlined';
+        }
     }
 
     const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName,i) => 
         <Button 
             key={i}
             className='answerButton'
-            variant='contained'
+            variant={getButtonVariant(ChordGenerator.dominantChords[keyName].symbol)}
+            color={getButtonColor(ChordGenerator.dominantChords[keyName].symbol)}
             onClick={() => answer(ChordGenerator.dominantChords[keyName].symbol)}
         >
             {ChordGenerator.dominantChords[keyName].symbol}
         </Button>
     );
 
+    const printQuestion = () => {
+        console.log(questions);
+    }
 
     return (
         <div className="udvidelser">
 
             <div className='content'>
                 <h2>Hvad hører du?</h2>
-                <div className='chordButtons'>
-                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Dominant</Button>
-                </div>
                 <div className='answerButtons'>
                     {answerButtons}
                 </div>
-                <p>{questions.chord}</p>
+                <div className='chordButtons'>
+                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Dominant</Button>
+                </div>
             </div>
             
             
             <Paper elevation={2} className='footer'>
-                <Button variant='contained' onPointerDown={getNewDominantChord} startIcon={<NavigateBeforeIcon/>}>Giv op</Button>
-                <p>8/10</p>
-                <Button variant='contained' onPointerDown={getNewDominantChord} endIcon={<NavigateNextIcon/>}>Næste</Button>
+                <p>{curQuestion.toString() + ' / ' + questions.length}</p>
+                <Button variant='contained' onPointerDown={nextQuestion} endIcon={<NavigateNextIcon/>}>
+                    {questionAnswered ? 'Next' : 'Skip'}
+                </Button>
             </Paper>
         </div>
     );
