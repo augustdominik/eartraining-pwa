@@ -1,4 +1,5 @@
 import { Note } from 'tonal';
+import { cloneDeep } from 'lodash';
 
 export const dominantChords = {
     seventh: {
@@ -54,9 +55,10 @@ function transposeChord(chord, semitones){
 export function getRandomDominant(){
 
     const keys = Object.keys(dominantChords);
-    var chord = dominantChords[keys[Math.floor(keys.length * Math.random())]];
+    var chord = cloneDeep(dominantChords[keys[Math.floor(keys.length * Math.random())]]);
     const transposeBySemitones = 6 + Math.floor(Math.random() * 12); //Added the sixth because the original voicings are way too low
-    chord.voicings.forEach(voicing => voicing = transposeChord(voicing,transposeBySemitones));
+    //const transposedChord = chord.voicings.forEach(voicing => transposeChord(voicing,transposeBySemitones));
+    chord.voicings = chord.voicings.map((voicing) => transposeChord(voicing, transposeBySemitones));
     return chord;
 }
 

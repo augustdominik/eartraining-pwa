@@ -3,7 +3,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import * as Tone from 'tone';
-import { Button, FormControlLabel, Checkbox, Paper } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
 
@@ -50,14 +50,15 @@ const sampler = new Tone.Sampler({
 function QuizUdvidelser({questions, setQuestions}) {
 
     //dominant and tonic
-    const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant());
+    const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant().voicings[0]);
 
     const getNewDominantChord = () => {
-        setDominantChord(ChordGenerator.getRandomDominant().voicing[0]);
+        setDominantChord(ChordGenerator.getRandomDominant().voicings[0]);
     }
 
     const playDominantChord = () => {
         sampler.triggerAttackRelease(dominantChord, '2n');
+        console.log(dominantChord);
     };
 
     const answer = (answerString) => {

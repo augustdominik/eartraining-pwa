@@ -21,18 +21,6 @@ function generateQuestions(amount){
 
 function Udvidelser() {
 
-    //--Menu før quiz
-    //En bool til at se, hvorvidt quizzen er startet.
-    //Et inputfelt til at indtaste, hvor mange spørgsmål vi vil have
-    //En startknap, der sætter den ovenstående bool til true
-    //--Quiz
-    // vi skal bruge en form for game function
-    //
-    //--Evaluering
-
-    //const [quizInProgress, setQuizInProgress] = React.useState(false);
-    //const [evaluationInProgress, setEvaluationInProgress] = React.useState(false);
-
     //states include: menu, quiz, evaluation
     const [curState, setState] = React.useState('menu');
     const [questions, setQuestions] = React.useState();

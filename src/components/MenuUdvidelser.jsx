@@ -12,7 +12,6 @@ export default function MenuUdvidelser({startQuiz}){
     return(
         <div className="menu-udvidelser">
             <div className="content">
-                <Typography variant="h3">Quiz: Udvidelser på Dominanten</Typography>
                 <div className="slider">
                     <Typography>Antal spørgsmål:</Typography>
                     <Slider className="slider-num-answers"
