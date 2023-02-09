@@ -1,11 +1,11 @@
 import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import * as Tone from 'tone';
 import { Button, Paper } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
+import { textTransform } from '@mui/system';
 
 // PIANO SAMPLER
 const sampler = new Tone.Sampler({
@@ -51,20 +51,15 @@ const sampler = new Tone.Sampler({
 function QuizUdvidelser({questions, setQuestions, setState}) {
 
     //dominant and tonic
-    const [dominantChord, setDominantChord] = React.useState(ChordGenerator.getRandomDominant().voicings[0]);
-    const [curQuestion, setCurQuestion] = React.useState(1);
+    const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
 
-    const getNewDominantChord = () => {
-        setDominantChord(ChordGenerator.getRandomDominant().voicings[0]);
-    }
-
     const playDominantChord = () => {
-        sampler.triggerAttackRelease(questions[curQuestion - 1].chord.voicings[0], '2n');
+        sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
     };
 
     const nextQuestion = () => {
-        if(curQuestion >= questions.length){
+        if(curQuestion >= questions.length - 1){
             setState('menu');
         } else {
             setQuestionAnswered(false);
@@ -103,6 +98,7 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
 
     const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName,i) => 
         <Button 
+            style={{textTransform:'none'}}
             key={i}
             className='answerButton'
             variant={getButtonVariant(ChordGenerator.dominantChords[keyName].symbol)}
@@ -112,10 +108,6 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
             {ChordGenerator.dominantChords[keyName].symbol}
         </Button>
     );
-
-    const printQuestion = () => {
-        console.log(questions);
-    }
 
     return (
         <div className="udvidelser">
@@ -132,7 +124,7 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
             
             
             <Paper elevation={2} className='footer'>
-                <p>{curQuestion.toString() + ' / ' + questions.length}</p>
+                <p>{(1+curQuestion).toString() + ' / ' + questions.length}</p>
                 <Button variant='contained' onPointerDown={nextQuestion} endIcon={<NavigateNextIcon/>}>
                     {questionAnswered ? 'Next' : 'Skip'}
                 </Button>
