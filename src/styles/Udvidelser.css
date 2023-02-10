@@ -1,4 +1,4 @@
-.udvidelser{
+.udvidelser-quiz{
     display: flex;
     flex:1;
     align-self: stretch;
@@ -13,6 +13,14 @@
     grid-gap: 2em;
 }
 
+.udvidelser-quiz-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 20px;
+}
 
 .footer{
    display:flex;

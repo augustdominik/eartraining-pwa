@@ -110,15 +110,15 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
     );
 
     return (
-        <div className="udvidelser">
+        <div className="udvidelser-quiz">
 
-            <div className='content'>
+            <div className='udvidelser-quiz-content'>
                 <h2>Hvad hører du?</h2>
                 <div className='answerButtons'>
                     {answerButtons}
                 </div>
                 <div className='chordButtons'>
-                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Dominant</Button>
+                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Spil</Button>
                 </div>
             </div>
             
@@ -126,7 +126,7 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
             <Paper elevation={2} className='footer'>
                 <p>{(1+curQuestion).toString() + ' / ' + questions.length}</p>
                 <Button variant='contained' onPointerDown={nextQuestion} endIcon={<NavigateNextIcon/>}>
-                    {questionAnswered ? 'Next' : 'Skip'}
+                    {questionAnswered ? 'Næste' : 'Spring over'}
                 </Button>
             </Paper>
         </div>

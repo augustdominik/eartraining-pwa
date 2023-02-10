@@ -37,6 +37,10 @@ export const dominantChords = {
     flatThirteenthFlatNinth: {
         voicings:[['C2', 'Bb2', 'Db3', 'E3', 'Ab3']],
         symbol:'b13b9'
+    },
+    flatThirteenthSharpNinth: {
+        voicings:[['C2', 'Bb2', 'D#4', 'E3', 'Ab3']],
+        symbol:'b13#9'
     }
 }
 

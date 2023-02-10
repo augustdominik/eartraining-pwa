@@ -3,25 +3,27 @@
     flex-direction: column;
     align-self: stretch;
     flex:1;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    text-align: center;
 }
 
-.content{
+.menu-udvidelser-content{
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     flex: 1;
-    gap: 20px;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
 }
 
 .slider{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
 }
-
 
 .slider-num-answers{
     width: 50%;
