@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/eartraining-pwa/static/css/main.66477c56.css",
+    "main.js": "/eartraining-pwa/static/js/main.8fbd5a90.js",
+    "static/js/787.7e0c76e8.chunk.js": "/eartraining-pwa/static/js/787.7e0c76e8.chunk.js",
+    "service-worker.js": "/eartraining-pwa/service-worker.js",
+    "index.html": "/eartraining-pwa/index.html",
+    "main.66477c56.css.map": "/eartraining-pwa/static/css/main.66477c56.css.map",
+    "main.8fbd5a90.js.map": "/eartraining-pwa/static/js/main.8fbd5a90.js.map",
+    "787.7e0c76e8.chunk.js.map": "/eartraining-pwa/static/js/787.7e0c76e8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66477c56.css",
+    "static/js/main.8fbd5a90.js"
+  ]
+}
