@@ -1,7 +1,7 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -9,18 +9,18 @@ import ErrorPage from './error-page';
 import Udvidelser from './routes/Udvidelser';
 import Hjem from './routes/Hjem';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <Root/>,
         errorElement: <ErrorPage />,
         children:[
             {
-                path:'udvidelser/',
+                path:'udvidelser',
                 element: <Udvidelser/>
             },
             {
-                path:'hjem/',
+                path:'hjem',
                 element: <Hjem/>
             }
         ]

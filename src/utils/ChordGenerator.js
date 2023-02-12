@@ -41,6 +41,10 @@ export const dominantChords = {
     flatThirteenthSharpNinth: {
         voicings:[['C2', 'Bb2', 'D#4', 'E3', 'Ab3']],
         symbol:'b13#9'
+    },
+    birkChord: {
+        voicings:[['C2', 'Bb2', 'D#4', 'E3', 'Ab3', 'F#4', 'Db4', 'B3']],
+        symbol:'b13#9'
     }
 }
 

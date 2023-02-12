@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppBar from '../components/AppBar';
-import { Drawer } from '@mui/material';
+import { createTheme, Drawer, ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -12,8 +12,17 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Outlet, Link } from 'react-router-dom';
 import '../styles/Root.css';
+import { blue, red } from '@mui/material/colors';
 
 function Root() {
+
+    const theme = createTheme({
+        palette:{
+            primary:{
+                main: blue[500]
+            }
+        }
+    });
 
     const [state, setState] = React.useState({
         top: false,
@@ -80,17 +89,19 @@ function Root() {
     );
 
     return (
-        <div className="App">
-            <AppBar toggleSideBar={toggleDrawer('left', true)} />
-            <Drawer
-                anchor={'left'}
-                open={state['left']}
-                onClose={toggleDrawer('left', false)}
-            >
-                {list('left')}
-            </Drawer>
-            <Outlet/>
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <AppBar toggleSideBar={toggleDrawer('left', true)} />
+                <Drawer
+                    anchor={'left'}
+                    open={state['left']}
+                    onClose={toggleDrawer('left', false)}
+                >
+                    {list('left')}
+                </Drawer>
+                <Outlet />
+            </div>
+        </ThemeProvider>
     );
 }
 

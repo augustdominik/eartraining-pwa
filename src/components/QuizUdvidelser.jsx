@@ -2,10 +2,9 @@ import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import * as Tone from 'tone';
-import { Button, Paper } from '@mui/material';
+import { Button, Fade, Paper } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
-import { textTransform } from '@mui/system';
 
 // PIANO SAMPLER
 const sampler = new Tone.Sampler({
@@ -48,7 +47,7 @@ const sampler = new Tone.Sampler({
 }).toDestination();
 
 
-function QuizUdvidelser({questions, setQuestions, setState}) {
+function QuizUdvidelser({ questions, setQuestions, setState }) {
 
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
@@ -59,7 +58,7 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
     };
 
     const nextQuestion = () => {
-        if(curQuestion >= questions.length - 1){
+        if (curQuestion >= questions.length - 1) {
             setState('menu');
         } else {
             setQuestionAnswered(false);
@@ -72,33 +71,33 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
         setQuestionAnswered(true);
     }
 
-    const getButtonColor = (symbol) =>{
-        if(questionAnswered){
-            if(symbol === questions[curQuestion].answer){
+    const getButtonColor = (symbol) => {
+        if (questionAnswered) {
+            if (symbol === questions[curQuestion].answer) {
                 return 'success';
-            }else{
+            } else {
                 return 'error';
             }
-        }else{
+        } else {
             return 'primary';
         }
     }
 
-    const getButtonVariant = (symbol) =>{
-        if(questionAnswered){
-            if(symbol === questions[curQuestion].answer || symbol === questions[curQuestion].guess){
+    const getButtonVariant = (symbol) => {
+        if (questionAnswered) {
+            if (symbol === questions[curQuestion].answer || symbol === questions[curQuestion].guess) {
                 return 'contained';
-            }else {
+            } else {
                 return 'outlined';
             }
-        }else{
+        } else {
             return 'outlined';
         }
     }
 
-    const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName,i) => 
-        <Button 
-            style={{textTransform:'none'}}
+    const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName, i) =>
+        <Button
+            style={{ textTransform: 'none' }}
             key={i}
             className='answerButton'
             variant={getButtonVariant(ChordGenerator.dominantChords[keyName].symbol)}
@@ -110,26 +109,28 @@ function QuizUdvidelser({questions, setQuestions, setState}) {
     );
 
     return (
-        <div className="udvidelser-quiz">
+        <Fade in={true}>
+            <div className="udvidelser-quiz">
 
-            <div className='udvidelser-quiz-content'>
-                <h2>Hvad hører du?</h2>
-                <div className='answerButtons'>
-                    {answerButtons}
+                <div className='udvidelser-quiz-content'>
+                    <h2>Hvad hører du?</h2>
+                    <div className='answerButtons'>
+                        {answerButtons}
+                    </div>
+                    <div className='chordButtons'>
+                        <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Spil</Button>
+                    </div>
                 </div>
-                <div className='chordButtons'>
-                    <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Spil</Button>
-                </div>
+
+
+                <Paper elevation={2} className='footer'>
+                    <p>{(1 + curQuestion).toString() + ' / ' + questions.length}</p>
+                    <Button variant='contained' onPointerDown={nextQuestion} endIcon={<NavigateNextIcon />}>
+                        {questionAnswered ? 'Næste' : 'Spring over'}
+                    </Button>
+                </Paper>
             </div>
-            
-            
-            <Paper elevation={2} className='footer'>
-                <p>{(1+curQuestion).toString() + ' / ' + questions.length}</p>
-                <Button variant='contained' onPointerDown={nextQuestion} endIcon={<NavigateNextIcon/>}>
-                    {questionAnswered ? 'Næste' : 'Spring over'}
-                </Button>
-            </Paper>
-        </div>
+        </Fade>
     );
 }
 
