@@ -20,7 +20,7 @@ const router = createHashRouter([
                 element: <Udvidelser/>
             },
             {
-                path:'hjem',
+                path:'/',
                 element: <Hjem/>
             }
         ]

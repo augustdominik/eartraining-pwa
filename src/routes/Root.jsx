@@ -47,7 +47,7 @@ function Root() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <ListItem disablePadding component={Link} to='/Hjem'>
+                <ListItem disablePadding component={Link} to='/'>
                     <ListItemButton>
                         <ListItemIcon>
                             {<InboxIcon />}

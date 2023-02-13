@@ -7,8 +7,8 @@ function CardButton({ title, description, route }) {
         <Card sx={{ flex: 1 }} >
             <CardActionArea component={Link} to={route}>
                 <CardContent>
-                    <Typography variant="h5">{title}</Typography>
-                    <Typography sx={{ fontSize: 14 }}>{description}</Typography>
+                    <Typography sx={{ fontSize: 14 }}>{title}</Typography>
+                    <Typography sx={{ fontSize: 12, fontWeight:100 }}>{description}</Typography>
                 </CardContent>
             </CardActionArea>
         </Card >
@@ -26,8 +26,8 @@ function CardButtonKvintCirkel({ title, description, route }) {
                     alt="circle of fifths"
                 />
                 <CardContent>
-                    <Typography variant="h5">{title}</Typography>
-                    <Typography sx={{ fontSize: 14 }}>{description}</Typography>
+                    <Typography sx={{ fontSize: 14 }}>{title}</Typography>
+                    <Typography sx={{ fontSize: 12, fontWeight:100 }}>{description}</Typography>
                 </CardContent>
             </CardActionArea>
         </Card >
@@ -39,7 +39,7 @@ export default function Hjem() {
         <Fade in={true}>
             <Box sx={{ padding: 3 }}>
                 <Box sx={{ marginBottom: 3 }}>
-                    <Typography variant="h5">Velkommen tilbage hørechefen!</Typography>
+                    <Typography variant="h5">Velkommen tilbage, hørechefen!</Typography>
                 </Box>
                 <Divider sx={{ marginBottom: 3 }} />
                 <Box
