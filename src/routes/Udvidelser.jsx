@@ -25,7 +25,7 @@ function Udvidelser() {
     const [curState, setState] = React.useState('menu');
     const [questions, setQuestions] = React.useState();
 
-    const startQuiz = (numQuestions) => {
+    const startQuiz = (numQuestions, chordsToIncludeList) => {
         setQuestions(generateQuestions(numQuestions));
         setState('quiz');
     }

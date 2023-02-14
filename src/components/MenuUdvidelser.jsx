@@ -3,8 +3,25 @@ import { Accordion, AccordionSummary, AccordionDetails, Box, Button, Fade, Slide
 import React from "react";
 import '../styles/MenuUdvidelser.css';
 import * as ChordGenerator from '../utils/ChordGenerator';
+import { cloneDeep } from 'lodash';
+
+function loadChordsToIncludeList() {
+    const chordsToChoose = [];
+
+    Object.keys(ChordGenerator.dominantChords).map((keyName, i) => {
+        const chordItem = {}
+        chordItem.symbol = ChordGenerator.dominantChords[keyName].symbol;
+        chordItem.include = false;
+        chordsToChoose.push(chordItem);
+    });
+    return chordsToChoose;
+}
 
 export default function MenuUdvidelser({ startQuiz }) {
+
+
+    const [chordsToIncludeList, setChordsToIncludeList] = React.useState(loadChordsToIncludeList());
+
     const [numQuestions, setNumQuestions] = React.useState(15)
     const [expanded, setExpanded] = React.useState(false);
 
@@ -16,19 +33,37 @@ export default function MenuUdvidelser({ startQuiz }) {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName, i) =>
+    const toggleIncludeChord = (chordToToggleInclude) => {
+        setChordsToIncludeList(
+            chordsToIncludeList.map((chord) => {
+                if (chord.symbol === chordToToggleInclude.symbol) {
+                    chord.include = !chord.include;
+                }
+                return chord;
+            })
+        );
+    }
+
+    const toggleIncludeAllChords = (include) => {
+        setChordsToIncludeList(
+            chordsToIncludeList.map((chord) => {
+                chord.include = include;
+                return chord;
+            })
+        )
+    }
+
+    const chordsToIncludeButtons = chordsToIncludeList.map((chord, i) =>
         <Button
             style={{ textTransform: 'none' }}
             key={i}
             className='answerButton'
-            onClick={() => console.log('clicked')}
-            variant='outlined'
+            onClick={() => toggleIncludeChord(chord)}
+            variant={chord.include ? 'contained' : 'outlined'}
         >
-            {ChordGenerator.dominantChords[keyName].symbol}
+            {chord.symbol}
         </Button>
     );
-
-
 
     return (
         <Fade in={true}>
@@ -45,9 +80,20 @@ export default function MenuUdvidelser({ startQuiz }) {
                             <Typography sx={{ color: 'text.secondary' }}>10/10</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Button variant="outlined">Vælg alle</Button>
+                            <Button
+                                variant="outlined"
+                                onClick={() => toggleIncludeAllChords(true)}
+                            >
+                                Vælg alle
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                onClick={() => toggleIncludeAllChords(false)}
+                            >
+                                Fravælg alle
+                            </Button>
                             <Box>
-                                {answerButtons}
+                                {chordsToIncludeButtons}
                             </Box>
                         </AccordionDetails>
                     </Accordion>
@@ -60,7 +106,7 @@ export default function MenuUdvidelser({ startQuiz }) {
                         max={30}
                         valueLabelDisplay='on'
                     />
-                    <Button variant="contained" onClick={() => startQuiz(numQuestions)}>Start Quiz</Button>
+                    <Button variant="contained" onClick={() => startQuiz(numQuestions, chordsToIncludeList)}>Start Quiz</Button>
                 </div>
             </div>
         </Fade>

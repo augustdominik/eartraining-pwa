@@ -89,29 +89,3 @@ export function getDominantShell(){
     return transposedChord;
 }
 
-export function getExtensions(chord, extensions){
-
-    const rootNote = chord[0];
-    var extensionsNotes = [];
-
-    extensions.forEach(extension => {
-
-        if(extension === 'b9'){
-            extensionsNotes.push(Note.fromMidi((Note.midi(rootNote) + 13)));
-        }else if(extension === '9'){
-
-        }else if(extension === '#9'){
-
-        }else if(extension === '#11'){
-
-        }else if(extension === '13'){
-
-        }else if(extension === 'b13'){
-
-        }
-
-    });
-
-    return extensions;
-}
-
