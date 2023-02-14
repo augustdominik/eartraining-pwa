@@ -42,6 +42,18 @@ export const dominantChords = {
         voicings:[['C2', 'Bb2', 'D#4', 'E3', 'Ab3']],
         symbol:'b13#9'
     },
+    thirteenthSusFour: {
+        voicings:[['C2', 'G2', 'Bb2', 'D3', 'F3', 'A3']],
+        symbol:'13(sus4)'
+    },
+    thirteenthFlatNinthSusFour: {
+        voicings:[['C2', 'G2', 'Bb2', 'Db3', 'F3', 'A3']],
+        symbol:'13b9(sus4)'
+    },
+    seventhSusFour: {
+        voicings:[['C2', 'Bb2', 'F3', 'G3']],
+        symbol:'7(sus4)'
+    },
 }
 
 

@@ -65,10 +65,22 @@ export default function MenuUdvidelser({ startQuiz }) {
         </Button>
     );
 
+    const amountSelectedChords = () => {
+        var amount = 0;
+        chordsToIncludeList.forEach((chord) => {
+            if(chord.include)
+                amount= amount + 1;
+        });
+        return amount.toString() + ' / ' + chordsToIncludeList.length.toString();
+    }
+
     return (
         <Fade in={true}>
-            <div className="menu-udvidelser">
-                <Box sx={{ textAlign: 'left' }}>
+            <Box 
+                className="menu-udvidelser"
+                sx={{paddingLeft:2, paddingRight:2}}
+            >
+                <Box sx={{ textAlign: 'left'}}>
                     <Typography variant="body1">Vælg akkorder</Typography>
                     <Accordion expanded={expanded === 'dominanter'} onChange={handleChangeAccordion('dominanter')}>
                         <AccordionSummary
@@ -77,22 +89,28 @@ export default function MenuUdvidelser({ startQuiz }) {
                             <Typography sx={{ width: '33%', flexShrink: 0 }}>
                                 Dominanter
                             </Typography>
-                            <Typography sx={{ color: 'text.secondary' }}>10/10</Typography>
+                            <Typography sx={{ color: 'text.secondary' }}>{amountSelectedChords()}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Button
-                                variant="outlined"
-                                onClick={() => toggleIncludeAllChords(true)}
-                            >
-                                Vælg alle
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                onClick={() => toggleIncludeAllChords(false)}
-                            >
-                                Fravælg alle
-                            </Button>
-                            <Box>
+                            <Box sx={{ display: 'flex', gap: 2, marginBottom: 2 }}>
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => toggleIncludeAllChords(true)}
+                                >
+                                    Vælg alle
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => toggleIncludeAllChords(false)}
+                                >
+                                    Fravælg alle
+                                </Button>
+                            </Box>
+                            <Box sx={{
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                                gap: 1,
+                            }}>
                                 {chordsToIncludeButtons}
                             </Box>
                         </AccordionDetails>
@@ -108,7 +126,7 @@ export default function MenuUdvidelser({ startQuiz }) {
                     />
                     <Button variant="contained" onClick={() => startQuiz(numQuestions, chordsToIncludeList)}>Start Quiz</Button>
                 </div>
-            </div>
+            </Box>
         </Fade>
     );
 }
