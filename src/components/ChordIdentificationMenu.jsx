@@ -37,7 +37,7 @@ function cleanChordsToIncludeList(chordsToIncludeList) {
     return arrayOfChordSymbols;
 }
 
-export default function MenuUdvidelser({ startQuiz }) {
+export default function ChordIdentificationMenu({ startQuiz }) {
 
 
     const [chordsToIncludeList, setChordsToIncludeList] = React.useState(loadChordsToIncludeList());

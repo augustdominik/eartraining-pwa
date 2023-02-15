@@ -49,12 +49,12 @@ export default function Hjem() {
                         marginBottom: 2,
                         gap: 2
                     }}>
-                    <CardButton title='Akkordhøring' description='Quiz om dominanter' route='/Udvidelser' />
-                    <CardButton title='Trinfornemmelse' description='"Giv mig lige do igen"' route='/Udvidelser' />
-                    <CardButton title='Hukommelse' description='Hedder du Als?' route='/Udvidelser' />
-                    <CardButton title='Rundgange' description='IIm-V7-Imaj7 osv.' route='/Udvidelser' />
+                    <CardButton title='Akkordhøring' description='Quiz om dominanter' route='/ChordIdentification' />
+                    <CardButton title='Trinfornemmelse' description='"Giv mig lige do igen"' route='/ChordIdentification' />
+                    <CardButton title='Hukommelse' description='Hedder du Als?' route='/ChordIdentification' />
+                    <CardButton title='Rundgange' description='IIm-V7-Imaj7 osv.' route='/ChordIdentification' />
                 </Box>
-                <CardButtonKvintCirkel title='Kvintcirklen' description='Et godt værktøj' route='/Udvidelser' />
+                <CardButtonKvintCirkel title='Kvintcirklen' description='Et godt værktøj' route='/ChordIdentification' />
             </Box>
         </Fade>
     );

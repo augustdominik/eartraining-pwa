@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
-import MenuUdvidelser from '../components/MenuUdvidelser';
-import QuizUdvidelser from '../components/QuizUdvidelser';
+import ChordIdentificationEvaluation from '../components/ChordIdentificationEvaluation';
+import ChordIdentificationMenu from '../components/ChordIdentificationMenu';
+import ChordIdentificationQuiz from '../components/ChordIdentificationQuiz';
 
 function generateQuestions(numQuestions, chordsToIncludeList) {
 
@@ -21,7 +22,7 @@ function generateQuestions(numQuestions, chordsToIncludeList) {
     return questions;
 }
 
-function Udvidelser() {
+function ChordIdentificationRoot() {
 
     //states include: menu, quiz, evaluation
     const [curState, setState] = React.useState('menu');
@@ -37,17 +38,17 @@ function Udvidelser() {
     const renderState = (_state) => {
 
         if (_state === 'menu') {
-            return (<MenuUdvidelser startQuiz={startQuiz} />);
+            return (<ChordIdentificationMenu startQuiz={startQuiz} />);
         } else if (_state === 'quiz') {
-            return (<QuizUdvidelser
+            return (<ChordIdentificationQuiz
                 questions={questions}
                 setQuestions={() => setQuestions}
                 setState={setState}
                 chordsToInclude={chordsToInclude}/>);
         } else if (_state === 'evaluation') {
-
+            return(<ChordIdentificationEvaluation questions={questions}/>)
         } else {
-            return (<MenuUdvidelser />);
+            return (<ChordIdentificationMenu />);
         }
     }
 
@@ -56,4 +57,4 @@ function Udvidelser() {
     );
 }
 
-export default Udvidelser;
+export default ChordIdentificationRoot;

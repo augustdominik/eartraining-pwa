@@ -6,8 +6,8 @@ import Root from './routes/Root';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import ErrorPage from './error-page';
-import Udvidelser from './routes/Udvidelser';
 import Hjem from './routes/Hjem';
+import ChordIdentificationRoot from './routes/ChordIdentificationRoot';
 
 const router = createHashRouter([
     {
@@ -16,8 +16,8 @@ const router = createHashRouter([
         errorElement: <ErrorPage />,
         children:[
             {
-                path:'udvidelser',
-                element: <Udvidelser/>
+                path:'chordidentification',
+                element: <ChordIdentificationRoot/>
             },
             {
                 path:'/',

@@ -52,7 +52,7 @@ const sampler = new Tone.Sampler({
 const playerRightAnwser = new Tone.Player(SoundRightAnswer).toDestination();
 const playerWrongAnswer = new Tone.Player(SoundWrongAnswer).toDestination();
 
-function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) {
+function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToInclude }) {
 
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
@@ -72,7 +72,7 @@ function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) 
 
     const nextQuestion = () => {
         if (curQuestion >= questions.length - 1) {
-            setState('menu');
+            setState('evaluation');
         } else {
             setQuestionAnswered(false);
             setCurQuestion(curQuestion + 1);
@@ -179,4 +179,4 @@ function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) 
     );
 }
 
-export default QuizUdvidelser;
+export default ChordIdentificationQuiz;
