@@ -23,7 +23,6 @@ function loadChordsToIncludeList() {
 
 function saveChordsToIncludeList(chordsToIncludeList) {
     localStorage.setItem('chordsToIncludeList', JSON.stringify(chordsToIncludeList));
-    console.log(JSON.stringify(chordsToIncludeList));
 }
 
 //returns an array of chord symbol strings

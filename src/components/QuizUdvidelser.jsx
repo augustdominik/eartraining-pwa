@@ -2,9 +2,12 @@ import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import * as Tone from 'tone';
-import { Button, Fade, Paper } from '@mui/material';
+import { Button, Fade, Paper, Typography } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
+import { Box } from '@mui/system';
+import SoundRightAnswer from '../assets/right.mp3';
+import SoundWrongAnswer from '../assets/wrong.mp3';
 
 // PIANO SAMPLER
 const sampler = new Tone.Sampler({
@@ -46,6 +49,8 @@ const sampler = new Tone.Sampler({
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
 
+const playerRightAnwser = new Tone.Player(SoundRightAnswer).toDestination();
+const playerWrongAnswer = new Tone.Player(SoundWrongAnswer).toDestination();
 
 function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) {
 
@@ -56,6 +61,14 @@ function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) 
     const playDominantChord = () => {
         sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
     };
+
+    const playFeedbackSound = (wasRight) => {
+        if(wasRight){
+            playerRightAnwser.start(0);
+        }else{
+            playerWrongAnswer.start(0);
+        }
+    }
 
     const nextQuestion = () => {
         if (curQuestion >= questions.length - 1) {
@@ -69,6 +82,7 @@ function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) 
     const answer = (answerString) => {
         setQuestions(questions[curQuestion].guess = answerString);
         setQuestionAnswered(true);
+        playFeedbackSound(questions[curQuestion].answer === answerString);
     }
 
     const getButtonColor = (symbol) => {
@@ -110,26 +124,57 @@ function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) 
 
     return (
         <Fade in={true}>
-            <div className="udvidelser-quiz">
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    alignSelf: 'stretch',
+                }}>
 
-                <div className='udvidelser-quiz-content'>
-                    <h2>Hvad hører du?</h2>
-                    <div className='answerButtons'>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        flex: 1,
+                        padding: 2
+                    }}
+                >
+                    <Typography variant='h5'>Hvad hører du?</Typography>
+                    <Box sx={{
+                        display:'grid',
+                        gridTemplateColumns:'1fr 1fr 1fr 1fr',
+                        gap:2
+                    }}>
                         {answerButtons}
-                    </div>
-                    <div className='chordButtons'>
-                        <Button variant='contained' onPointerDown={playDominantChord} endIcon={<VolumeUpIcon />}>Spil</Button>
-                    </div>
-                </div>
+                    </Box>
+                    <Button
+                        variant='contained'
+                        onPointerDown={playDominantChord}
+                        endIcon={<VolumeUpIcon />}
+                        fullWidth={true}
+                    >
+                        Spil akkord
+                    </Button>
+                </Box>
 
 
-                <Paper elevation={2} className='footer'>
+                <Paper
+                    elevation={2}
+                    className='footer'
+                    sx={{paddingLeft:2}}
+                >
                     <p>{(1 + curQuestion).toString() + ' / ' + questions.length}</p>
-                    <Button variant='contained' onPointerDown={nextQuestion} endIcon={<NavigateNextIcon />}>
+                    <Button
+                        variant='contained'
+                        onPointerDown={nextQuestion}
+                        endIcon={<NavigateNextIcon />}
+                    >
                         {questionAnswered ? 'Næste' : 'Spring over'}
                     </Button>
                 </Paper>
-            </div>
+            </Box>
         </Fade>
     );
 }
