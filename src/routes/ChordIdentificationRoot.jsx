@@ -46,7 +46,7 @@ function ChordIdentificationRoot() {
                 setState={setState}
                 chordsToInclude={chordsToInclude}/>);
         } else if (_state === 'evaluation') {
-            return(<ChordIdentificationEvaluation questions={questions}/>)
+            return(<ChordIdentificationEvaluation questions={questions} setState={setState}/>)
         } else {
             return (<ChordIdentificationMenu />);
         }
