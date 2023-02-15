@@ -13,13 +13,25 @@ import MailIcon from '@mui/icons-material/Mail';
 import { Outlet, Link } from 'react-router-dom';
 import '../styles/Root.css';
 import { blue } from '@mui/material/colors';
+import { palette } from '@mui/system';
 
 function Root() {
 
     const theme = createTheme({
-        palette:{
-            primary:{
+        palette: {
+            primary: {
                 main: blue[500]
+            }
+        },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    contained: {
+                        "&:hover": {
+                           // backgroundColor: blue[500]
+                        },
+                    }
+                }
             }
         }
     });

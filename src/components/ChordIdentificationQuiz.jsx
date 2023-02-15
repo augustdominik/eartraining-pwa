@@ -70,7 +70,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
         }
     }
 
-    const nextQuestion = () => {
+    const nextQuestion = (event) => {
         if (curQuestion >= questions.length - 1) {
             setState('evaluation');
         } else {
@@ -111,7 +111,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
 
     const answerButtons = chordsToInclude.map((chordSymbol, i) =>
         <Button
-            style={{ textTransform: 'none' }}
+            style={{ textTransform: 'none', "&:hover": 'none'}}
             key={i}
             className='answerButton'
             variant={getButtonVariant(chordSymbol)}
