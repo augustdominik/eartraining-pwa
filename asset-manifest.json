@@ -1,17 +1,19 @@
 {
   "files": {
     "main.css": "/eartraining-pwa/static/css/main.51a41316.css",
-    "main.js": "/eartraining-pwa/static/js/main.ba73f46f.js",
+    "main.js": "/eartraining-pwa/static/js/main.e0c5dbb5.js",
     "static/js/787.7e0c76e8.chunk.js": "/eartraining-pwa/static/js/787.7e0c76e8.chunk.js",
     "static/media/kvintcirklen.png": "/eartraining-pwa/static/media/kvintcirklen.23442bbc7817722b58d1.png",
     "service-worker.js": "/eartraining-pwa/service-worker.js",
+    "static/media/right.mp3": "/eartraining-pwa/static/media/right.1af49ba903962fdc1e7d.mp3",
+    "static/media/wrong.mp3": "/eartraining-pwa/static/media/wrong.2f9386a51b5984c8bec4.mp3",
     "index.html": "/eartraining-pwa/index.html",
     "main.51a41316.css.map": "/eartraining-pwa/static/css/main.51a41316.css.map",
-    "main.ba73f46f.js.map": "/eartraining-pwa/static/js/main.ba73f46f.js.map",
+    "main.e0c5dbb5.js.map": "/eartraining-pwa/static/js/main.e0c5dbb5.js.map",
     "787.7e0c76e8.chunk.js.map": "/eartraining-pwa/static/js/787.7e0c76e8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.51a41316.css",
-    "static/js/main.ba73f46f.js"
+    "static/js/main.e0c5dbb5.js"
   ]
 }
