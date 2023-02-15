@@ -3,18 +3,39 @@ import { Accordion, AccordionSummary, AccordionDetails, Box, Button, Fade, Slide
 import React from "react";
 import '../styles/MenuUdvidelser.css';
 import * as ChordGenerator from '../utils/ChordGenerator';
-import { cloneDeep } from 'lodash';
 
 function loadChordsToIncludeList() {
-    const chordsToChoose = [];
+    const chordsToIncludeList = [];
+
+    //If we've saved a chordsToIncludeList, load that
+    if (localStorage.getItem('chordsToIncludeList') != null) {
+        return JSON.parse(localStorage.getItem('chordsToIncludeList'));
+    }
 
     Object.keys(ChordGenerator.dominantChords).map((keyName, i) => {
         const chordItem = {}
         chordItem.symbol = ChordGenerator.dominantChords[keyName].symbol;
         chordItem.include = false;
-        chordsToChoose.push(chordItem);
+        chordsToIncludeList.push(chordItem);
     });
-    return chordsToChoose;
+    return chordsToIncludeList;
+}
+
+function saveChordsToIncludeList(chordsToIncludeList) {
+    localStorage.setItem('chordsToIncludeList', JSON.stringify(chordsToIncludeList));
+    console.log(JSON.stringify(chordsToIncludeList));
+}
+
+//returns an array of chord symbol strings
+function cleanChordsToIncludeList(chordsToIncludeList) {
+    var arrayOfChordSymbols = [];
+
+    chordsToIncludeList.forEach((chordItem) => {
+        if (chordItem.include)
+            arrayOfChordSymbols.push(chordItem.symbol);
+    })
+
+    return arrayOfChordSymbols;
 }
 
 export default function MenuUdvidelser({ startQuiz }) {
@@ -68,19 +89,19 @@ export default function MenuUdvidelser({ startQuiz }) {
     const amountSelectedChords = () => {
         var amount = 0;
         chordsToIncludeList.forEach((chord) => {
-            if(chord.include)
-                amount= amount + 1;
+            if (chord.include)
+                amount = amount + 1;
         });
         return amount.toString() + ' / ' + chordsToIncludeList.length.toString();
     }
 
     return (
         <Fade in={true}>
-            <Box 
+            <Box
                 className="menu-udvidelser"
-                sx={{paddingLeft:2, paddingRight:2}}
+                sx={{ paddingLeft: 2, paddingRight: 2 }}
             >
-                <Box sx={{ textAlign: 'left'}}>
+                <Box sx={{ textAlign: 'left' }}>
                     <Typography variant="body1">Vælg akkorder</Typography>
                     <Accordion expanded={expanded === 'dominanter'} onChange={handleChangeAccordion('dominanter')}>
                         <AccordionSummary
@@ -124,7 +145,14 @@ export default function MenuUdvidelser({ startQuiz }) {
                         max={30}
                         valueLabelDisplay='on'
                     />
-                    <Button variant="contained" onClick={() => startQuiz(numQuestions, chordsToIncludeList)}>Start Quiz</Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            startQuiz(numQuestions, cleanChordsToIncludeList(chordsToIncludeList));
+                            saveChordsToIncludeList(chordsToIncludeList);
+                        }}>
+                        Start Quiz
+                    </Button>
                 </div>
             </Box>
         </Fade>

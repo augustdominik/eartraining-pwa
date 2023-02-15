@@ -47,7 +47,7 @@ const sampler = new Tone.Sampler({
 }).toDestination();
 
 
-function QuizUdvidelser({ questions, setQuestions, setState }) {
+function QuizUdvidelser({ questions, setQuestions, setState, chordsToInclude }) {
 
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
@@ -95,16 +95,16 @@ function QuizUdvidelser({ questions, setQuestions, setState }) {
         }
     }
 
-    const answerButtons = Object.keys(ChordGenerator.dominantChords).map((keyName, i) =>
+    const answerButtons = chordsToInclude.map((chordSymbol, i) =>
         <Button
             style={{ textTransform: 'none' }}
             key={i}
             className='answerButton'
-            variant={getButtonVariant(ChordGenerator.dominantChords[keyName].symbol)}
-            color={getButtonColor(ChordGenerator.dominantChords[keyName].symbol)}
-            onClick={() => answer(ChordGenerator.dominantChords[keyName].symbol)}
+            variant={getButtonVariant(chordSymbol)}
+            color={getButtonColor(chordSymbol)}
+            onClick={() => answer(chordSymbol)}
         >
-            {ChordGenerator.dominantChords[keyName].symbol}
+            {chordSymbol}
         </Button>
     );
 
