@@ -90,7 +90,7 @@ function getDominantFromSymbol(chordSymbol){
 
     //if none matches, return the first chord from the chordDictionary
     console.log('no matching chords');
-    return dominantChords[keys[0]];
+    return cloneDeep(dominantChords[keys[0]]);
 }
 
 export function getDominantTransposed(chordSymbol) {
