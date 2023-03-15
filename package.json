@@ -1,7 +1,7 @@
 {
   "name": "eartraining-pwa",
   "version": "0.1.0",
-  "homepage": "https://guciodevs.github.io/eartraining-pwa",
+  "homepage": "https://augustdominik.github.io/eartraining-pwa",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",

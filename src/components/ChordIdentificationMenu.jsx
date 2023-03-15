@@ -8,9 +8,9 @@ function loadChordsToIncludeList() {
     const chordsToIncludeList = [];
 
     //If we've saved a chordsToIncludeList, load that
-    if (localStorage.getItem('chordsToIncludeList') != null) {
-        return JSON.parse(localStorage.getItem('chordsToIncludeList'));
-    }
+    // if (localStorage.getItem('chordsToIncludeList') != null) {
+    //     return JSON.parse(localStorage.getItem('chordsToIncludeList'));
+    // }
 
     Object.keys(ChordGenerator.dominantChords).map((keyName, i) => {
         const chordItem = {}
@@ -40,10 +40,11 @@ function cleanChordsToIncludeList(chordsToIncludeList) {
 export default function ChordIdentificationMenu({ startQuiz }) {
 
 
-    const [chordsToIncludeList, setChordsToIncludeList] = React.useState(loadChordsToIncludeList());
+    const [chordsToIncludeList, setChordsToIncludeList] = 
+        React.useState(loadChordsToIncludeList());
 
     const [numQuestions, setNumQuestions] = React.useState(15)
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState('dominanter');
 
     const handleChange = (event, newValue) => {
         setNumQuestions(newValue);
@@ -85,7 +86,17 @@ export default function ChordIdentificationMenu({ startQuiz }) {
         </Button>
     );
 
+
     const amountSelectedChords = () => {
+        var amount = 0;
+        chordsToIncludeList.forEach((chord) => {
+            if (chord.include)
+                amount = amount + 1;
+        });
+        return amount;
+    }
+
+    const amountSelectedChordsString = () => {
         var amount = 0;
         chordsToIncludeList.forEach((chord) => {
             if (chord.include)
@@ -100,8 +111,8 @@ export default function ChordIdentificationMenu({ startQuiz }) {
                 className="menu-udvidelser"
                 sx={{ paddingLeft: 2, paddingRight: 2 }}
             >
+                <Typography variant="h4">Vælg akkorder</Typography>
                 <Box sx={{ textAlign: 'left' }}>
-                    <Typography variant="body1">Vælg akkorder</Typography>
                     <Accordion expanded={expanded === 'dominanter'} onChange={handleChangeAccordion('dominanter')}>
                         <AccordionSummary
                             expandIcon={<ExpandMore />}
@@ -109,7 +120,7 @@ export default function ChordIdentificationMenu({ startQuiz }) {
                             <Typography sx={{ width: '33%', flexShrink: 0 }}>
                                 Dominanter
                             </Typography>
-                            <Typography sx={{ color: 'text.secondary' }}>{amountSelectedChords()}</Typography>
+                            <Typography sx={{ color: 'text.secondary' }}>{amountSelectedChordsString()}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Box sx={{ display: 'flex', gap: 2, marginBottom: 2 }}>
@@ -145,6 +156,7 @@ export default function ChordIdentificationMenu({ startQuiz }) {
                         valueLabelDisplay='on'
                     />
                     <Button
+                        disabled={amountSelectedChords() > 0 ? false : true}
                         variant="contained"
                         onClick={() => {
                             startQuiz(numQuestions, cleanChordsToIncludeList(chordsToIncludeList));

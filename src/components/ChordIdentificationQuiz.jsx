@@ -8,6 +8,7 @@ import '../styles/Udvidelser.css';
 import { Box } from '@mui/system';
 import SoundRightAnswer from '../assets/right.mp3';
 import SoundWrongAnswer from '../assets/wrong.mp3';
+import { random } from 'lodash';
 
 // PIANO SAMPLER
 const sampler = new Tone.Sampler({
@@ -45,6 +46,7 @@ const sampler = new Tone.Sampler({
     },
 
     release: 10,
+    volume:1,
 
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
@@ -59,7 +61,13 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
 
     const playDominantChord = () => {
-        sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
+
+        const triggerAttackTime = random(0.01, 0.07);
+
+        questions[curQuestion].chord.voicings[0].map((note, idx) => {
+            sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
+        })
+        //sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
     };
 
     const playFeedbackSound = (wasRight) => {
@@ -154,6 +162,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
                         onPointerDown={playDominantChord}
                         endIcon={<VolumeUpIcon />}
                         fullWidth={true}
+                        sx={{height:'75px'}}
                     >
                         Spil akkord
                     </Button>

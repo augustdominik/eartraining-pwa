@@ -8,12 +8,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import NavigateNext from '@mui/icons-material/NavigateNext';
 import MailIcon from '@mui/icons-material/Mail';
 import { Outlet, Link } from 'react-router-dom';
 import '../styles/Root.css';
 import { blue } from '@mui/material/colors';
-import { palette } from '@mui/system';
 
 function Root() {
 
@@ -62,7 +61,7 @@ function Root() {
                 <ListItem disablePadding component={Link} to='/'>
                     <ListItemButton>
                         <ListItemIcon>
-                            {<InboxIcon />}
+                            {<NavigateNext />}
                         </ListItemIcon>
                         <ListItemText primary={'Hjem'} />
                     </ListItemButton>
@@ -70,7 +69,7 @@ function Root() {
                 <ListItem disablePadding component={Link} to='/ChordIdentification'>
                     <ListItemButton>
                         <ListItemIcon>
-                            {<InboxIcon />}
+                            {<NavigateNext />}
                         </ListItemIcon>
                         <ListItemText primary={'Akkordhøring'} />
                     </ListItemButton>
@@ -78,7 +77,7 @@ function Root() {
                 <ListItem disablePadding component={Link} to='/ChordIdentification'>
                     <ListItemButton>
                         <ListItemIcon>
-                            {<InboxIcon />}
+                            {<NavigateNext />}
                         </ListItemIcon>
                         <ListItemText primary={'Solfachef'} />
                     </ListItemButton>
@@ -90,7 +89,7 @@ function Root() {
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {index % 2 === 0 ? <NavigateNext /> : <MailIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>

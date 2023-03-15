@@ -7,9 +7,10 @@ export default function ChordIdentificationEvaluation({ questions, setState }) {
     const [canClickOk, setCanClickOk] = React.useState(false);
 
     const setStateToMenu = () => {
-        if(!canClickOk)
+        if(canClickOk === false)
             return;
         setState('menu')
+        setCanClickOk(false);
     }
 
     const getRowColor = (question) => {
@@ -26,7 +27,7 @@ export default function ChordIdentificationEvaluation({ questions, setState }) {
     }
 
     return (
-        <Fade addEndListener={() => setCanClickOk(true)} in={true}>
+        <Fade onEntered={() => setCanClickOk(true)} in={true}>
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',

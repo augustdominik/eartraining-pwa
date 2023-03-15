@@ -29,6 +29,7 @@ function ChordIdentificationRoot() {
     const [questions, setQuestions] = React.useState();
     const [chordsToInclude, setChordsToInclude] = React.useState([]);
 
+
     const startQuiz = (numQuestions, chordsToIncludeList) => {
         setQuestions(generateQuestions(numQuestions, chordsToIncludeList));
         setChordsToInclude(chordsToIncludeList);
