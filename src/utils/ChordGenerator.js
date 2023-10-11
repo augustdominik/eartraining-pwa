@@ -28,11 +28,11 @@ export const dominantChords = {
     },
     sharpEleventhSharpNine: {
         voicings: [['C2','E2', 'Bb2', 'Eb3', 'F#3']],
-        symbol: '#11 #9'
+        symbol: '#11#9'
     },
     sharpEleventhFlatNine: {
         voicings: [['C2','Bb2', 'Db3', 'E3', 'F#3']],
-        symbol: '#11 b9'
+        symbol: '#11b9'
     },
     thirteenth: {
         voicings: [['C2', 'Bb2', 'E3', 'A3']],
@@ -40,7 +40,7 @@ export const dominantChords = {
     },
     thirteenthSharpEleven: {
         voicings: [['C2', 'Bb2', 'E3', 'F#3', 'A3']],
-        symbol: '13 #11'
+        symbol: '13#11'
     },
     thirteenthSharpElevenNinth: {
         voicings: [['C2', 'Bb2', 'D3','E3', 'F#3', 'A3']],
@@ -48,11 +48,11 @@ export const dominantChords = {
     },
     thirteenthFlatNinth: {
         voicings: [['C2', 'Bb2', 'Db3', 'E3', 'A3']],
-        symbol: '13 b9'
+        symbol: '13b9'
     },
     thirteenthSharpNinth: {
         voicings: [['C2', 'Bb2', 'E3', 'A3', 'Eb4']],
-        symbol: '13 #9'
+        symbol: '13#9'
     },
     flatThirteenth: {
         voicings: [['C2', 'Bb2', 'E3', 'Ab3']],
@@ -60,11 +60,11 @@ export const dominantChords = {
     },
     flatThirteenthFlatNinth: {
         voicings: [['C2', 'Bb2', 'Db3', 'E3', 'Ab3']],
-        symbol: 'b13 b9'
+        symbol: 'b13b9'
     },
     flatThirteenthSharpNinth: {
         voicings: [['C2', 'Bb2', 'D#4', 'E3', 'Ab3']],
-        symbol: 'b13 #9'
+        symbol: 'b13#9'
     },
     thirteenthSusFour: {
         voicings: [['C2', 'G2', 'Bb2', 'D3', 'F3', 'A3']],
@@ -121,6 +121,10 @@ export function getDominantTransposed(chordSymbol) {
     //const transposedChord = chord.voicings.forEach(voicing => transposeChord(voicing,transposeBySemitones));
     chord.voicings = chord.voicings.map((voicing) => transposeChord(voicing, transposeBySemitones));
     return chord;
+}
+
+export function getInnerHearingChord(){
+
 }
 
 

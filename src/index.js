@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import ErrorPage from './error-page';
 import Hjem from './routes/Hjem';
 import ChordIdentificationRoot from './routes/ChordIdentificationRoot';
+import InnerHearingRoot from './routes/InnerHearingRoot';
 
 const router = createHashRouter([
     {
@@ -18,6 +19,10 @@ const router = createHashRouter([
             {
                 path:'chordidentification',
                 element: <ChordIdentificationRoot/>
+            },
+            {
+                path:'innerhearing',
+                element: <InnerHearingRoot/>
             },
             {
                 path:'/',

@@ -8,9 +8,9 @@ function loadChordsToIncludeList() {
     const chordsToIncludeList = [];
 
     //If we've saved a chordsToIncludeList, load that
-    // if (localStorage.getItem('chordsToIncludeList') != null) {
-    //     return JSON.parse(localStorage.getItem('chordsToIncludeList'));
-    // }
+     // if (localStorage.getItem('chordsToIncludeList') != null) {
+     //     return JSON.parse(localStorage.getItem('chordsToIncludeList'));
+     // }
 
     Object.keys(ChordGenerator.dominantChords).map((keyName, i) => {
         const chordItem = {}
@@ -139,7 +139,7 @@ export default function ChordIdentificationMenu({ startQuiz }) {
                             </Box>
                             <Box sx={{
                                 display: 'grid',
-                                gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                                gridTemplateColumns: '1fr 1fr 1fr',
                                 gap: 1,
                             }}>
                                 {chordsToIncludeButtons}
