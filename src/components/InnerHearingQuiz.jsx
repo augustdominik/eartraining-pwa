@@ -58,6 +58,7 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
     const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord());
+    const [showChord,setShowChord] = React.useState(false);
 
     const playChord = () => {
 
@@ -67,23 +68,19 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
         chord.map((note, idx) => {
             sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
         })
+
     };
 
-    //TODO
     const playRootNote = () => {
-
-        // ChordGenerator.getInnerHearingChord();
-        const triggerAttackTime = random(0.01, 0.07);
-
-        chord.map((note, idx) => {
-            sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
-        })
+        sampler.triggerAttackRelease(chord[0], '1n');
     };
 
     const nextQuestion = (event) => {
         if (curQuestion >= questions.length - 1) {
             setState('evaluation');
         } else {
+            setChord(ChordGenerator.getInnerHearingChord());
+            setShowChord(false);
             setQuestionAnswered(false);
             setCurQuestion(curQuestion + 1);
         }
@@ -116,14 +113,24 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                         gap:2
                     }}>
                     </Box>
+                    <p>do: {chord[0]}</p>
+                    {showChord ? <p>{chord}</p> : <p></p>}
                     <Button
                         variant='contained'
-                        onPointerDown={() => setChord(ChordGenerator.getInnerHearingChord())}
+                        onPointerDown={()=>setShowChord(true)}
+                        fullWidth={true}
+                        sx={{height:'75px'}}
+                    >
+                        Vis svar
+                    </Button>
+                    <Button
+                        variant='contained'
+                        onPointerDown={()=>playRootNote()}
                         endIcon={<VolumeUpIcon />}
                         fullWidth={true}
                         sx={{height:'75px'}}
                     >
-                        Ny akkord
+                        Spil do
                     </Button>
                     <Button
                         variant='contained'
@@ -148,7 +155,7 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                         onPointerDown={nextQuestion}
                         endIcon={<NavigateNextIcon />}
                     >
-                        {questionAnswered ? 'Næste' : 'Spring over'}
+                        {questionAnswered ? 'Næste' : 'Næste'}
                     </Button>
                 </Paper>
             </Box>

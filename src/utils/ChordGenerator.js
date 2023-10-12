@@ -138,6 +138,9 @@ export function getInnerHearingChord() {
 
     while(chord.length < 4){
         const note = Midi.midiToNoteName(getRandomInt(52,72));
+        //TODO
+        if(chord.includes(note))
+            return;
         chord.push(note);
     }
 
