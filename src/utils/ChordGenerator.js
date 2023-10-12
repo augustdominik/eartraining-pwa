@@ -1,4 +1,4 @@
-import { Note } from 'tonal';
+import { Midi, Note } from 'tonal';
 import { cloneDeep, wrap } from 'lodash';
 
 export const dominantChords = {
@@ -27,11 +27,11 @@ export const dominantChords = {
         symbol: '#11'
     },
     sharpEleventhSharpNine: {
-        voicings: [['C2','E2', 'Bb2', 'Eb3', 'F#3']],
+        voicings: [['C2', 'E2', 'Bb2', 'Eb3', 'F#3']],
         symbol: '#11#9'
     },
     sharpEleventhFlatNine: {
-        voicings: [['C2','Bb2', 'Db3', 'E3', 'F#3']],
+        voicings: [['C2', 'Bb2', 'Db3', 'E3', 'F#3']],
         symbol: '#11b9'
     },
     thirteenth: {
@@ -43,7 +43,7 @@ export const dominantChords = {
         symbol: '13#11'
     },
     thirteenthSharpElevenNinth: {
-        voicings: [['C2', 'Bb2', 'D3','E3', 'F#3', 'A3']],
+        voicings: [['C2', 'Bb2', 'D3', 'E3', 'F#3', 'A3']],
         symbol: '13 #11 9'
     },
     thirteenthFlatNinth: {
@@ -98,12 +98,12 @@ export function getRandomDominant() {
     return chord;
 }
 
-function getDominantFromSymbol(chordSymbol){
+function getDominantFromSymbol(chordSymbol) {
 
     const keys = Object.keys(dominantChords);
 
-    for(let i = 0; i < keys.length; i++){
-        if(dominantChords[keys[i]].symbol === chordSymbol){
+    for (let i = 0; i < keys.length; i++) {
+        if (dominantChords[keys[i]].symbol === chordSymbol) {
             return cloneDeep(dominantChords[keys[i]]);
         }
     }
@@ -123,7 +123,25 @@ export function getDominantTransposed(chordSymbol) {
     return chord;
 }
 
-export function getInnerHearingChord(){
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+export function getInnerHearingChord() {
+
+    const chord = [];
+
+    const root = Midi.midiToNoteName(getRandomInt(36,48));
+    chord.push(root);
+
+    while(chord.length < 4){
+        const note = Midi.midiToNoteName(getRandomInt(52,72));
+        chord.push(note);
+    }
+
+    return chord;
 
 }
 

@@ -57,15 +57,27 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
+    const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord());
 
     const playChord = () => {
 
+        // ChordGenerator.getInnerHearingChord();
         const triggerAttackTime = random(0.01, 0.07);
 
-        questions[curQuestion].chord.notes.map((note, idx) => {
+        chord.map((note, idx) => {
             sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
         })
-        //sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
+    };
+
+    //TODO
+    const playRootNote = () => {
+
+        // ChordGenerator.getInnerHearingChord();
+        const triggerAttackTime = random(0.01, 0.07);
+
+        chord.map((note, idx) => {
+            sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
+        })
     };
 
     const nextQuestion = (event) => {
@@ -106,12 +118,21 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                     </Box>
                     <Button
                         variant='contained'
+                        onPointerDown={() => setChord(ChordGenerator.getInnerHearingChord())}
+                        endIcon={<VolumeUpIcon />}
+                        fullWidth={true}
+                        sx={{height:'75px'}}
+                    >
+                        Ny akkord
+                    </Button>
+                    <Button
+                        variant='contained'
                         onPointerDown={playChord}
                         endIcon={<VolumeUpIcon />}
                         fullWidth={true}
                         sx={{height:'75px'}}
                     >
-                        Spil akkord
+                        Spil
                     </Button>
                 </Box>
 
