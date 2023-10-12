@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/eartraining-pwa/static/css/main.2d8f0812.css",
-    "main.js": "/eartraining-pwa/static/js/main.ca4d5744.js",
+    "main.js": "/eartraining-pwa/static/js/main.597a161f.js",
     "static/js/787.7e0c76e8.chunk.js": "/eartraining-pwa/static/js/787.7e0c76e8.chunk.js",
     "static/media/kvintcirklen.png": "/eartraining-pwa/static/media/kvintcirklen.23442bbc7817722b58d1.png",
     "service-worker.js": "/eartraining-pwa/service-worker.js",
@@ -9,11 +9,11 @@
     "static/media/wrong.mp3": "/eartraining-pwa/static/media/wrong.2f9386a51b5984c8bec4.mp3",
     "index.html": "/eartraining-pwa/index.html",
     "main.2d8f0812.css.map": "/eartraining-pwa/static/css/main.2d8f0812.css.map",
-    "main.ca4d5744.js.map": "/eartraining-pwa/static/js/main.ca4d5744.js.map",
+    "main.597a161f.js.map": "/eartraining-pwa/static/js/main.597a161f.js.map",
     "787.7e0c76e8.chunk.js.map": "/eartraining-pwa/static/js/787.7e0c76e8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2d8f0812.css",
-    "static/js/main.ca4d5744.js"
+    "static/js/main.597a161f.js"
   ]
 }
