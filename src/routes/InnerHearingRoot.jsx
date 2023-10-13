@@ -45,7 +45,7 @@ function InnerHearingRoot() {
                 setState={setState}
             />);
         } else if (_state === 'evaluation') {
-            return(<ChordIdentificationEvaluation questions={questions} setState={setState}/>)
+            setState('menu');
         } else {
             return (<ChordIdentificationMenu />);
         }

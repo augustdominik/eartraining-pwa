@@ -133,15 +133,17 @@ export function getInnerHearingChord() {
 
     const chord = [];
 
-    const root = Midi.midiToNoteName(getRandomInt(36,48));
+    const root = Midi.midiToNoteName(getRandomInt(36, 48));
     chord.push(root);
 
-    while(chord.length < 4){
-        const note = Midi.midiToNoteName(getRandomInt(52,72));
-        //TODO
-        if(chord.includes(note))
-            return;
-        chord.push(note);
+    while (chord.length < 4) {
+
+        const note = Midi.midiToNoteName(getRandomInt(52, 72));
+
+        if (chord.some((noteInChord) => noteInChord.slice(0, note.length - 1) === note.slice(0, note.length - 1))) {
+        } else {
+            chord.push(note);
+        }
     }
 
     return chord;

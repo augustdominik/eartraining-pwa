@@ -51,6 +51,9 @@ const sampler = new Tone.Sampler({
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
 
+const reverb = new Tone.Reverb(5);
+sampler.chain(reverb, Tone.Destination);
+
 const playerRightAnwser = new Tone.Player(SoundRightAnswer).toDestination();
 const playerWrongAnswer = new Tone.Player(SoundWrongAnswer).toDestination();
 

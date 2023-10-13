@@ -7,8 +7,6 @@ import { Button, Fade, Paper, Typography } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
 import { Box } from '@mui/system';
-import SoundRightAnswer from '../assets/right.mp3';
-import SoundWrongAnswer from '../assets/wrong.mp3';
 import { random } from 'lodash';
 
 // PIANO SAMPLER
@@ -47,10 +45,13 @@ const sampler = new Tone.Sampler({
     },
 
     release: 10,
-    volume:1,
+    volume: 1,
 
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
+
+const reverb = new Tone.Reverb(5);
+sampler.chain(reverb, Tone.Destination);
 
 function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }) {
 
@@ -58,13 +59,14 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
     const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord());
-    const [showChord,setShowChord] = React.useState(false);
+    const [showChord, setShowChord] = React.useState(false);
 
     const playChord = () => {
 
         // ChordGenerator.getInnerHearingChord();
-        const triggerAttackTime = random(0.01, 0.07);
+        const triggerAttackTime = random(0.03, 0.15);
 
+        //TODO: få den til at spille akkorderne oppefra og ned også
         chord.map((note, idx) => {
             sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
         })
@@ -86,6 +88,17 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
         }
     }
 
+    const displayChord = () => {
+        var chordString = '';
+        if (chord.length > 0) {
+            chord.map((note) => {
+                chordString += note + ', ';
+            });
+        }
+
+        return <p>alle toner: {chordString}</p>
+    }
+
 
     return (
         <Fade in={true}>
@@ -101,53 +114,59 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'space-between',
+                        justifyContent: 'space-evenly',
                         flex: 1,
                         padding: 2
                     }}
                 >
-                    <Typography variant='h5'>Hvad hører du?</Typography>
+
+                    <Paper sx={{
+                        padding:'20px 20px'
+                        }}>
+                        <Typography variant='h5'>Hvad hører du?</Typography>
+                        <p>do: {chord ? chord[0] : '-'}</p>
+                        {showChord ? displayChord() : <p> - </p>}
+                    </Paper>
                     <Box sx={{
-                        display:'grid',
-                        gridTemplateColumns:'1fr 1fr 1fr 1fr',
-                        gap:2
-                    }}>
+                        display:'flex',
+                        flexDirection:'column',
+                        justifyContent:'space-between',
+                        gap:'30px'
+                        }}>
+                        <Button
+                            variant='contained'
+                            onPointerDown={() => setShowChord(true)}
+                            fullWidth={true}
+                            sx={{ height: '75px' }}
+                        >
+                            Vis svar
+                        </Button>
+                        <Button
+                            variant='contained'
+                            onPointerDown={() => playRootNote()}
+                            endIcon={<VolumeUpIcon />}
+                            fullWidth={true}
+                            sx={{ height: '75px' }}
+                        >
+                            Spil do
+                        </Button>
+                        <Button
+                            variant='contained'
+                            onPointerDown={playChord}
+                            endIcon={<VolumeUpIcon />}
+                            fullWidth={true}
+                            sx={{ height: '75px' }}
+                        >
+                            Spil akkord
+                        </Button>
                     </Box>
-                    <p>do: {chord[0]}</p>
-                    {showChord ? <p>{chord}</p> : <p></p>}
-                    <Button
-                        variant='contained'
-                        onPointerDown={()=>setShowChord(true)}
-                        fullWidth={true}
-                        sx={{height:'75px'}}
-                    >
-                        Vis svar
-                    </Button>
-                    <Button
-                        variant='contained'
-                        onPointerDown={()=>playRootNote()}
-                        endIcon={<VolumeUpIcon />}
-                        fullWidth={true}
-                        sx={{height:'75px'}}
-                    >
-                        Spil do
-                    </Button>
-                    <Button
-                        variant='contained'
-                        onPointerDown={playChord}
-                        endIcon={<VolumeUpIcon />}
-                        fullWidth={true}
-                        sx={{height:'75px'}}
-                    >
-                        Spil
-                    </Button>
                 </Box>
 
 
                 <Paper
                     elevation={2}
                     className='footer'
-                    sx={{paddingLeft:2}}
+                    sx={{ paddingLeft: 2 }}
                 >
                     <p>{(1 + curQuestion).toString() + ' / ' + questions.length}</p>
                     <Button
