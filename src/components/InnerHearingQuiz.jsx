@@ -1,9 +1,8 @@
-
 import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import * as Tone from 'tone';
-import { Button, Fade, Paper, Typography } from '@mui/material';
+import { Button, Fade, Paper, Slider, Typography } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
 import { Box } from '@mui/system';
@@ -53,25 +52,28 @@ const sampler = new Tone.Sampler({
 const reverb = new Tone.Reverb(5);
 sampler.chain(reverb, Tone.Destination);
 
-function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }) {
+function InnerHearingQuiz({ questions, setState}) {
 
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
     const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord());
     const [showChord, setShowChord] = React.useState(false);
+    const [toneDelay, setToneDelay] = React.useState(0.02);
+    const [sustainSeconds, setSustainSeconds] = React.useState(7);
 
     const playChord = () => {
 
-        // ChordGenerator.getInnerHearingChord();
-        const triggerAttackTime = random(0.03, 0.15);
-
         //TODO: få den til at spille akkorderne oppefra og ned også
         chord.map((note, idx) => {
-            sampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
+            sampler.triggerAttackRelease(note, sustainSeconds, `+${idx * toneDelay}`, 0.95);
         })
 
     };
+
+    const handleChange = (event) => {
+        setToneDelay(event.target.value);
+    }
 
     const playRootNote = () => {
         sampler.triggerAttackRelease(chord[0], '1n');
@@ -121,23 +123,51 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                 >
 
                     <Paper sx={{
-                        padding:'20px 20px'
-                        }}>
+                        padding: '20px 20px'
+                    }}>
                         <Typography variant='h5'>Hvad hører du?</Typography>
                         <p>do: {chord ? chord[0] : '-'}</p>
                         {showChord ? displayChord() : <p> - </p>}
                     </Paper>
                     <Box sx={{
-                        display:'flex',
-                        flexDirection:'column',
-                        justifyContent:'space-between',
-                        gap:'30px'
-                        }}>
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        gap: '30px'
+                    }}>
+                        {/* <Box sx={{display:'flex', justifyContent:'space-evenly', gap:'20px'}}> */}
+                        {/*     <Box sx={{display:'flex', flexDirection:'column'}}> */}
+                        {/*         <Typography>Speed</Typography> */}
+                        {/*         <Slider aria-label="Speed"  /> */}
+                        {/*     </Box> */}
+                        {/*     <Box sx={{display:'flex', flexDirection:'column'}}> */}
+                        {/*         <Typography>Sustain</Typography> */}
+                        {/*     </Box> */}
+                        {/* </Box> */}
+                        <Box>
+                            <Typography>Toneforsinkelse</Typography>
+                            <Slider
+                                value={toneDelay}
+                                onChange={(event) => setToneDelay(event.target.value)}
+                                min={0.00}
+                                max={0.2}
+                                step={0.01}
+                            />
+                        </Box>
+                        <Box>
+                            <Typography>Sustain</Typography>
+                            <Slider
+                                value={sustainSeconds}
+                                onChange={(event) => setSustainSeconds(event.target.value)}
+                                min={0.25}
+                                max={10}
+                                step={0.1}
+                            />
+                        </Box>
                         <Button
                             variant='contained'
                             onPointerDown={() => setShowChord(true)}
                             fullWidth={true}
-                            sx={{ height: '75px' }}
                         >
                             Vis svar
                         </Button>
@@ -146,7 +176,6 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                             onPointerDown={() => playRootNote()}
                             endIcon={<VolumeUpIcon />}
                             fullWidth={true}
-                            sx={{ height: '75px' }}
                         >
                             Spil do
                         </Button>
@@ -155,7 +184,6 @@ function InnerHearingQuiz({ questions, setQuestions, setState, chordsToInclude }
                             onPointerDown={playChord}
                             endIcon={<VolumeUpIcon />}
                             fullWidth={true}
-                            sx={{ height: '75px' }}
                         >
                             Spil akkord
                         </Button>
