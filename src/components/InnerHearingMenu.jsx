@@ -6,11 +6,8 @@ import * as ChordGenerator from '../utils/ChordGenerator';
 
 export default function InnerHearingMenu({ startQuiz }) {
 
-    const [numQuestions, setNumQuestions] = React.useState(15)
-
-    const handleChange = (event, newValue) => {
-        setNumQuestions(newValue);
-    }
+    const [numQuestions, setNumQuestions] = React.useState(5)
+    const [numTopTones, setNumTopTones] = React.useState(3)
 
     return (
         <Fade in={true}>
@@ -20,18 +17,30 @@ export default function InnerHearingMenu({ startQuiz }) {
             >
                 <div className="slider">
                     <Typography variant="h4">Inner hearing</Typography>
-                    <Slider className="slider-num-answers"
-                        onChange={handleChange}
-                        value={numQuestions}
-                        step={1}
-                        min={1}
-                        max={30}
-                        valueLabelDisplay='on'
-                    />
+                    <Box>
+                        <Typography>Antal spørgsmål: {numQuestions}</Typography>
+                        <Slider className="slider-num-answers"
+                            onChange={(event) => setNumQuestions(event.target.value)}
+                            value={numQuestions}
+                            step={1}
+                            min={1}
+                            max={30}
+                        />
+                    </Box>
+                    <Box>
+                        <Typography>Antal toner på toppen: {numTopTones}</Typography>
+                        <Slider className="slider-num-answers"
+                            onChange={(event) => setNumTopTones(event.target.value)}
+                            value={numTopTones}
+                            step={1}
+                            min={2}
+                            max={8}
+                        />
+                    </Box>
                     <Button
                         variant="contained"
                         onClick={() => {
-                            startQuiz(numQuestions);
+                            startQuiz(numQuestions, numTopTones);
                         }}>
                         Start
                     </Button>

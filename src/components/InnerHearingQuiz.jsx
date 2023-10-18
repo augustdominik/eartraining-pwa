@@ -52,14 +52,14 @@ const sampler = new Tone.Sampler({
 const reverb = new Tone.Reverb(5);
 sampler.chain(reverb, Tone.Destination);
 
-function InnerHearingQuiz({ questions, setState}) {
+function InnerHearingQuiz({ questions, setState, numTopTones}) {
 
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
-    const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord());
+    const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord(numTopTones));
     const [showChord, setShowChord] = React.useState(false);
-    const [toneDelay, setToneDelay] = React.useState(0.02);
+    const [toneDelay, setToneDelay] = React.useState(0.03);
     const [sustainSeconds, setSustainSeconds] = React.useState(7);
 
     const playChord = () => {
@@ -83,7 +83,7 @@ function InnerHearingQuiz({ questions, setState}) {
         if (curQuestion >= questions.length - 1) {
             setState('evaluation');
         } else {
-            setChord(ChordGenerator.getInnerHearingChord());
+            setChord(ChordGenerator.getInnerHearingChord(numTopTones));
             setShowChord(false);
             setQuestionAnswered(false);
             setCurQuestion(curQuestion + 1);
@@ -135,15 +135,6 @@ function InnerHearingQuiz({ questions, setState}) {
                         justifyContent: 'space-between',
                         gap: '30px'
                     }}>
-                        {/* <Box sx={{display:'flex', justifyContent:'space-evenly', gap:'20px'}}> */}
-                        {/*     <Box sx={{display:'flex', flexDirection:'column'}}> */}
-                        {/*         <Typography>Speed</Typography> */}
-                        {/*         <Slider aria-label="Speed"  /> */}
-                        {/*     </Box> */}
-                        {/*     <Box sx={{display:'flex', flexDirection:'column'}}> */}
-                        {/*         <Typography>Sustain</Typography> */}
-                        {/*     </Box> */}
-                        {/* </Box> */}
                         <Box>
                             <Typography>Toneforsinkelse</Typography>
                             <Slider

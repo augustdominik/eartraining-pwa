@@ -6,6 +6,7 @@ import ChordIdentificationMenu from '../components/ChordIdentificationMenu';
 import ChordIdentificationQuiz from '../components/ChordIdentificationQuiz';
 import InnerHearingMenu from '../components/InnerHearingMenu';
 import InnerHearingQuiz from '../components/InnerHearingQuiz';
+import { InnerHearingContext } from '../contexts/innerHearingContext';
 
 function generateQuestions(numQuestions) {
 
@@ -28,8 +29,11 @@ function InnerHearingRoot() {
     //states include: menu, quiz, evaluation
     const [curState, setState] = React.useState('menu');
     const [questions, setQuestions] = React.useState();
+    const [topTones, setTopTones] = React.useState(3);
+    //TODO num top tones
 
-    const startQuiz = (numQuestions) => {
+    const startQuiz = (numQuestions, numTopTones) => {
+        setTopTones(numTopTones);
         setQuestions(generateQuestions(numQuestions));
         setState('quiz');
     }
@@ -40,6 +44,7 @@ function InnerHearingRoot() {
             return (<InnerHearingMenu startQuiz={startQuiz} />);
         } else if (_state === 'quiz') {
             return (<InnerHearingQuiz
+                numTopTones={topTones}
                 questions={questions}
                 setQuestions={() => setQuestions}
                 setState={setState}

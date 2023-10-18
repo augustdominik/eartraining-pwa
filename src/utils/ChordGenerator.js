@@ -129,14 +129,14 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-export function getInnerHearingChord() {
+export function getInnerHearingChord(numTopTones) {
 
     const chord = [];
 
     const root = Midi.midiToNoteName(getRandomInt(36, 48));
     chord.push(root);
 
-    while (chord.length < 4) {
+    while (chord.length < numTopTones + 1) {
 
         const note = Midi.midiToNoteName(getRandomInt(52, 72));
 
