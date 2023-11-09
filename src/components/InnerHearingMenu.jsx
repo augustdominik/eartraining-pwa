@@ -34,7 +34,7 @@ export default function InnerHearingMenu({ startQuiz }) {
                             value={numTopTones}
                             step={1}
                             min={2}
-                            max={8}
+                            max={6}
                         />
                     </Box>
                     <Button

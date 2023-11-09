@@ -52,28 +52,22 @@ const sampler = new Tone.Sampler({
 const reverb = new Tone.Reverb(5);
 sampler.chain(reverb, Tone.Destination);
 
-function InnerHearingQuiz({ questions, setState, numTopTones}) {
+function InnerHearingQuiz({ questions, setState, numTopTones }) {
 
-    //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
     const [chord, setChord] = React.useState(ChordGenerator.getInnerHearingChord(numTopTones));
     const [showChord, setShowChord] = React.useState(false);
     const [toneDelay, setToneDelay] = React.useState(0.03);
-    const [sustainSeconds, setSustainSeconds] = React.useState(7);
+    const [sustainSeconds, setSustainSeconds] = React.useState(7.0);
 
     const playChord = () => {
 
-        //TODO: få den til at spille akkorderne oppefra og ned også
         chord.map((note, idx) => {
             sampler.triggerAttackRelease(note, sustainSeconds, `+${idx * toneDelay}`, 0.95);
         })
 
     };
-
-    const handleChange = (event) => {
-        setToneDelay(event.target.value);
-    }
 
     const playRootNote = () => {
         sampler.triggerAttackRelease(chord[0], '1n');
@@ -89,6 +83,10 @@ function InnerHearingQuiz({ questions, setState, numTopTones}) {
             setCurQuestion(curQuestion + 1);
         }
     }
+
+    const handleChange = (event, newValue) => {
+        setToneDelay(newValue);
+    };
 
     const displayChord = () => {
         var chordString = '';
@@ -139,7 +137,7 @@ function InnerHearingQuiz({ questions, setState, numTopTones}) {
                             <Typography>Toneforsinkelse</Typography>
                             <Slider
                                 value={toneDelay}
-                                onChange={(event) => setToneDelay(event.target.value)}
+                                onChange={handleChange}
                                 min={0.00}
                                 max={0.2}
                                 step={0.01}
@@ -150,7 +148,7 @@ function InnerHearingQuiz({ questions, setState, numTopTones}) {
                             <Slider
                                 value={sustainSeconds}
                                 onChange={(event) => setSustainSeconds(event.target.value)}
-                                min={0.25}
+                                min={0.5}
                                 max={10}
                                 step={0.1}
                             />
@@ -172,7 +170,7 @@ function InnerHearingQuiz({ questions, setState, numTopTones}) {
                         </Button>
                         <Button
                             variant='contained'
-                            onPointerDown={playChord}
+                            onPointerDown={() => playChord()}
                             endIcon={<VolumeUpIcon />}
                             fullWidth={true}
                         >
