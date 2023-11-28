@@ -37,9 +37,9 @@ function CardButtonKvintCirkel({ title, description, route }) {
 export default function Hjem() {
     return (
         <Fade in={true}>
-            <Box sx={{ padding: 3 }}>
+            <Box>
                 <Box sx={{ marginBottom: 3 }}>
-                    <Typography variant="h5">Velkommen tilbage, hørechefen!</Typography>
+                    <Typography variant="h4">Velkommen tilbage, hørechefen!</Typography>
                 </Box>
                 <Divider sx={{ marginBottom: 3 }} />
                 <Box

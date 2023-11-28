@@ -21,9 +21,6 @@ export default function ButtonAppBar({toggleSideBar}) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Augusts' Hørelæreapp
-                    </Typography>
                 </Toolbar>
             </AppBar>
         </Box>
