@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppBar from '../components/AppBar';
-import { createTheme, Drawer, IconButton, SwipeableDrawer, ThemeProvider } from '@mui/material';
+import { createTheme, Drawer, IconButton, SwipeableDrawer, ThemeProvider, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -91,7 +91,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={'Hjem'} />
+                        <ListItemText primary={<Typography style={{'color':'#000'}}>Hjem</Typography>} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component={Link} to='/ChordIdentification'>
@@ -99,7 +99,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={'Akkordhøring'} />
+                        <ListItemText primary={<Typography style={{'color':'#000'}}>Dominanter</Typography>} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component={Link} to='/ChordIdentification'>
@@ -107,7 +107,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={'Solfachef'} />
+                        <ListItemText primary={<Typography style={{'color':'#000'}}>Inner Hearing</Typography>} />
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -130,9 +130,8 @@ function Root() {
     return (
         <ThemeProvider theme={theme}>
             <Box className="App" sx={{'padding':3}}>
-                {/* <AppBar toggleSideBar={toggleDrawer('left', true)} /> */}
                 <IconButton 
-                    sx={{'alignSelf':'start', 'marginBottom':2}} 
+                    sx={{'alignSelf':'start', 'marginBottom':2, 'padding':0}} 
                     onClick={toggleDrawer('left', true)}>
                     <MenuIcon />
                 </IconButton>

@@ -45,7 +45,7 @@ export default function Hjem() {
                 <Box
                     sx={{
                         display: "grid",
-                        gridTemplateColumns: '1fr 1fr',
+                        gridTemplateColumns: '1fr',
                         marginBottom: 2,
                         gap: 2
                     }}>
