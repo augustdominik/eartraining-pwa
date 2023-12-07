@@ -54,8 +54,10 @@ function Root() {
             MuiButton: {
                 styleOverrides: {
                     contained: {
-                        "&:hover": {
-                            // backgroundColor: blue[500]
+                        '@media (hover: none)': {
+                            '&:hover': {
+                                backgroundColor: `${blue[200]} !important`
+                            }
                         },
                     }
                 }
@@ -91,7 +93,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={<Typography style={{'color':'#000'}}>Hjem</Typography>} />
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Hjem</Typography>} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component={Link} to='/ChordIdentification'>
@@ -99,7 +101,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={<Typography style={{'color':'#000'}}>Dominanter</Typography>} />
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Dominanter</Typography>} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component={Link} to='/ChordIdentification'>
@@ -107,7 +109,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={<Typography style={{'color':'#000'}}>Inner Hearing</Typography>} />
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Inner Hearing</Typography>} />
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -129,9 +131,9 @@ function Root() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box className="App" sx={{'padding':3}}>
-                <IconButton 
-                    sx={{'alignSelf':'start', 'marginBottom':2, 'padding':0}} 
+            <Box className="App" sx={{}}>
+                <IconButton
+                    sx={{ 'alignSelf': 'start', marginTop: 3, marginLeft: 3 }}
                     onClick={toggleDrawer('left', true)}>
                     <MenuIcon />
                 </IconButton>

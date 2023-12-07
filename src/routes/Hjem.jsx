@@ -1,6 +1,5 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Divider, Fade, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Divider, Fade, Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
-import kvintcirkel from '../assets/kvintcirklen.png';
 
 function CardButton({ title, description, route }) {
     return (
@@ -15,29 +14,11 @@ function CardButton({ title, description, route }) {
     );
 }
 
-function CardButtonKvintCirkel({ title, description, route }) {
-    return (
-        <Card sx={{ flex: 1 }} >
-            <CardActionArea component={Link} to={route}>
-                <CardMedia
-                    component="img"
-                    height='140'
-                    image={kvintcirkel}
-                    alt="circle of fifths"
-                />
-                <CardContent>
-                    <Typography sx={{ fontSize: 14 }}>{title}</Typography>
-                    <Typography sx={{ fontSize: 12, fontWeight:100 }}>{description}</Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card >
-    );
-}
 
 export default function Hjem() {
     return (
         <Fade in={true}>
-            <Box>
+            <Box sx={{marginX:3, marginTop:3}}>
                 <Box sx={{ marginBottom: 3 }}>
                     <Typography variant="h4">Velkommen tilbage, hørechefen!</Typography>
                 </Box>
