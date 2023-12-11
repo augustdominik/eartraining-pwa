@@ -1,7 +1,6 @@
 import { Box, Fade, Typography } from "@mui/material";
-import React from "react";
 
-export default function GameStringOfNotes({questions, numTones:number}){
+export default function GameStringOfNotes({questions, numTones}:{questions:number, numTones:number}){
 
     return(
         <Fade in={true}>

@@ -1,4 +1,4 @@
-import { Midi, Note } from 'tonal';
+import { Midi, Note } from '@tonaljs/tonal';
 import { cloneDeep, wrap } from 'lodash';
 
 export const dominantChords = {
