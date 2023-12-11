@@ -3,11 +3,10 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import * as Tone from 'tone';
 import { Button, Fade, Paper, Typography, useTheme } from '@mui/material';
-import * as ChordGenerator from '../utils/ChordGenerator';
-import '../styles/Udvidelser.css';
+import '../InnerHearing//Udvidelser.css';
 import { Box } from '@mui/system';
-import SoundRightAnswer from '../assets/right.mp3';
-import SoundWrongAnswer from '../assets/wrong.mp3';
+import SoundRightAnswer from '../../assets/right.mp3';
+import SoundWrongAnswer from '../../assets/wrong.mp3';
 import { random } from 'lodash';
 
 // PIANO SAMPLER

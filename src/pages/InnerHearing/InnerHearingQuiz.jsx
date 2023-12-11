@@ -3,10 +3,9 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import * as Tone from 'tone';
 import { Button, Fade, Paper, Slider, Typography } from '@mui/material';
-import * as ChordGenerator from '../utils/ChordGenerator';
-import '../styles/Udvidelser.css';
+import * as ChordGenerator from '../../utils/ChordGenerator.js';
+import '../InnerHearing/Udvidelser.css';
 import { Box } from '@mui/system';
-import { random } from 'lodash';
 
 // PIANO SAMPLER
 const sampler = new Tone.Sampler({

@@ -1,8 +1,6 @@
-import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionSummary, AccordionDetails, Box, Button, Fade, Slider, Typography } from "@mui/material";
+import { Box, Button, Fade, Slider, Typography } from "@mui/material";
 import React from "react";
-import '../styles/MenuUdvidelser.css';
-import * as ChordGenerator from '../utils/ChordGenerator';
+import './MenuUdvidelser.css';
 
 export default function InnerHearingMenu({ startQuiz }) {
 

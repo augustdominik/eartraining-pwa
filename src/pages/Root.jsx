@@ -1,6 +1,5 @@
 import * as React from 'react';
-import AppBar from '../components/AppBar';
-import { createTheme, Drawer, IconButton, SwipeableDrawer, ThemeProvider, Typography } from '@mui/material';
+import { createTheme, IconButton, SwipeableDrawer, ThemeProvider, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -11,12 +10,11 @@ import ListItemText from '@mui/material/ListItemText';
 import NavigateNext from '@mui/icons-material/NavigateNext';
 import MailIcon from '@mui/icons-material/Mail';
 import { Outlet, Link } from 'react-router-dom';
-import '../styles/Root.css';
-import { blue } from '@mui/material/colors';
+import './Root.css';
 import PlayFairDisplay from '../assets/Playfair_Display/static/PlayfairDisplay-Regular.ttf';
 import Roboto from '../assets/Roboto/Roboto-Medium.ttf';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button } from '@mantine/core';
+import { ROUTES } from '../router/routerConfig';
 
 function Root() {
 
@@ -79,7 +77,7 @@ function Root() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <ListItem disablePadding component={Link} to='/'>
+                <ListItem disablePadding component={Link} to={ROUTES.Home}>
                     <ListItemButton>
                         <ListItemIcon>
                             {<NavigateNext />}
@@ -87,7 +85,7 @@ function Root() {
                         <ListItemText primary={<Typography style={{ 'color': '#000' }}>Hjem</Typography>} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding component={Link} to='/ChordIdentification'>
+                <ListItem disablePadding component={Link} to={ROUTES.Extensions}>
                     <ListItemButton>
                         <ListItemIcon>
                             {<NavigateNext />}
@@ -95,7 +93,7 @@ function Root() {
                         <ListItemText primary={<Typography style={{ 'color': '#000' }}>Dominanter</Typography>} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding component={Link} to='/ChordIdentification'>
+                <ListItem disablePadding component={Link} to={ROUTES.InnerHearing}>
                     <ListItemButton>
                         <ListItemIcon>
                             {<NavigateNext />}

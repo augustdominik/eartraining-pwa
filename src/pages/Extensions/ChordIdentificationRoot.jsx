@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as ChordGenerator from '../utils/ChordGenerator';
-import '../styles/Udvidelser.css';
-import ChordIdentificationEvaluation from '../components/ChordIdentificationEvaluation';
-import ChordIdentificationMenu from '../components/ChordIdentificationMenu';
-import ChordIdentificationQuiz from '../components/ChordIdentificationQuiz';
+import * as ChordGenerator from '../../utils/ChordGenerator';
+import '../InnerHearing//Udvidelser.css';
+import ChordIdentificationEvaluation from './ChordIdentificationEvaluation';
+import ChordIdentificationMenu from './ChordIdentificationMenu';
+import ChordIdentificationQuiz from './ChordIdentificationQuiz';
 
 function generateQuestions(numQuestions, chordsToIncludeList) {
 

@@ -1,12 +1,8 @@
 import * as React from 'react';
-import * as ChordGenerator from '../utils/ChordGenerator';
-import '../styles/Udvidelser.css';
-import ChordIdentificationEvaluation from '../components/ChordIdentificationEvaluation';
-import ChordIdentificationMenu from '../components/ChordIdentificationMenu';
-import ChordIdentificationQuiz from '../components/ChordIdentificationQuiz';
-import InnerHearingMenu from '../components/InnerHearingMenu';
-import InnerHearingQuiz from '../components/InnerHearingQuiz';
-import { InnerHearingContext } from '../contexts/innerHearingContext';
+import * as ChordGenerator from '../../utils/ChordGenerator';
+import './Udvidelser.css';
+import InnerHearingMenu from './InnerHearingMenu';
+import InnerHearingQuiz from './InnerHearingQuiz';
 
 function generateQuestions(numQuestions) {
 
@@ -52,7 +48,7 @@ function InnerHearingRoot() {
         } else if (_state === 'evaluation') {
             setState('menu');
         } else {
-            return (<ChordIdentificationMenu />);
+            return (<InnerHearingMenu startQuiz={startQuiz}/>);
         }
     }
 

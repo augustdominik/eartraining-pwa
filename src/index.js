@@ -2,13 +2,14 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-import Root from './routes/Root';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import ErrorPage from './error-page';
-import Hjem from './routes/Hjem';
-import ChordIdentificationRoot from './routes/ChordIdentificationRoot';
-import InnerHearingRoot from './routes/InnerHearingRoot';
+import Home from './pages/Home/Home';
+import ChordIdentificationRoot from './pages/Extensions/ChordIdentificationRoot';
+import InnerHearingRoot from './pages/InnerHearing/InnerHearingRoot';
+import { ROUTES } from './router/routerConfig';
+import Root from './pages/Root';
 
 const router = createHashRouter([
     {
@@ -17,16 +18,16 @@ const router = createHashRouter([
         errorElement: <ErrorPage />,
         children:[
             {
-                path:'chordidentification',
+                path:ROUTES.Extensions,
                 element: <ChordIdentificationRoot/>
             },
             {
-                path:'innerhearing',
+                path:ROUTES.InnerHearing,
                 element: <InnerHearingRoot/>
             },
             {
-                path:'/',
-                element: <Hjem/>
+                path:ROUTES.Home,
+                element: <Home/>
             }
         ]
     },

@@ -1,5 +1,6 @@
 import { Box, Card, CardActionArea, CardContent, Divider, Fade, Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
+import { ROUTES } from "../../router/routerConfig";
 
 function CardButton({ title, description, route }) {
     return (
@@ -30,8 +31,8 @@ export default function Hjem() {
                         marginBottom: 2,
                         gap: 2
                     }}>
-                    <CardButton title='Akkordhøring' description='Udvidelser på dominanten.' route='/ChordIdentification' />
-                    <CardButton title='Indre høring'  description='Grundtone med vilkårlige toner på toppen.' route='/Innerhearing' />
+                    <CardButton title='Akkordhøring' description='Udvidelser på dominanten.' route={ROUTES.Extensions} />
+                    <CardButton title='Indre høring'  description='Grundtone med vilkårlige toner på toppen.' route={ROUTES.InnerHearing} />
                     {/* <CardButton title='Trinfornemmelse' description='"Giv mig lige do igen"' route='/ChordIdentification' /> */}
                     {/* <CardButton title='Hukommelse' description='Hedder du Als?' route='/ChordIdentification' /> */}
                     {/* <CardButton title='Rundgange' description='IIm-V7-Imaj7 osv.' route='/ChordIdentification' /> */}
