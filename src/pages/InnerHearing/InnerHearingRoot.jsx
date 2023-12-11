@@ -26,7 +26,6 @@ function InnerHearingRoot() {
     const [curState, setState] = React.useState('menu');
     const [questions, setQuestions] = React.useState();
     const [topTones, setTopTones] = React.useState(3);
-    //TODO num top tones
 
     const startQuiz = (numQuestions, numTopTones) => {
         setTopTones(numTopTones);

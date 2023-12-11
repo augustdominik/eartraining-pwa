@@ -10,6 +10,7 @@ import ChordIdentificationRoot from './pages/Extensions/ChordIdentificationRoot'
 import InnerHearingRoot from './pages/InnerHearing/InnerHearingRoot';
 import { ROUTES } from './router/routerConfig';
 import Root from './pages/Root';
+//import StateManagerStringOfNotes from './pages/StringOfNotes/StateManagerStringOfNotes';
 
 const router = createHashRouter([
     {
@@ -28,7 +29,11 @@ const router = createHashRouter([
             {
                 path:ROUTES.Home,
                 element: <Home/>
-            }
+            },
+            // {
+            //     path:ROUTES.StringOfNotes,
+            //     element: <StateManagerStringOfNotes/> 
+            // }
         ]
     },
 ]);

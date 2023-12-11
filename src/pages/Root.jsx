@@ -82,7 +82,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Hjem</Typography>} />
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Home</Typography>} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component={Link} to={ROUTES.Extensions}>
@@ -90,7 +90,7 @@ function Root() {
                         <ListItemIcon>
                             {<NavigateNext />}
                         </ListItemIcon>
-                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Dominanter</Typography>} />
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Extensions</Typography>} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding component={Link} to={ROUTES.InnerHearing}>
@@ -101,19 +101,25 @@ function Root() {
                         <ListItemText primary={<Typography style={{ 'color': '#000' }}>Inner Hearing</Typography>} />
                     </ListItemButton>
                 </ListItem>
+                <ListItem disablePadding component={Link} to={ROUTES.StringOfNotes}>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            {<NavigateNext />}
+                        </ListItemIcon>
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>String of Notes</Typography>} />
+                    </ListItemButton>
+                </ListItem>
             </List>
             <Divider />
             <List>
-                {['Om'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <NavigateNext /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <ListItem disablePadding component={Link} to={ROUTES.About}>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            {<NavigateNext />}
+                        </ListItemIcon>
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>About</Typography>} />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box>
     );

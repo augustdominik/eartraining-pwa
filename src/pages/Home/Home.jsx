@@ -21,7 +21,7 @@ export default function Hjem() {
         <Fade in={true}>
             <Box sx={{marginX:3, marginTop:3}}>
                 <Box sx={{ marginBottom: 3 }}>
-                    <Typography variant="h4">Velkommen tilbage, hørechefen!</Typography>
+                    <Typography variant="h4">Welcome back, Chief of Hearing!</Typography>
                 </Box>
                 <Divider sx={{ marginBottom: 3 }} />
                 <Box
@@ -31,13 +31,10 @@ export default function Hjem() {
                         marginBottom: 2,
                         gap: 2
                     }}>
-                    <CardButton title='Akkordhøring' description='Udvidelser på dominanten.' route={ROUTES.Extensions} />
-                    <CardButton title='Indre høring'  description='Grundtone med vilkårlige toner på toppen.' route={ROUTES.InnerHearing} />
-                    {/* <CardButton title='Trinfornemmelse' description='"Giv mig lige do igen"' route='/ChordIdentification' /> */}
-                    {/* <CardButton title='Hukommelse' description='Hedder du Als?' route='/ChordIdentification' /> */}
-                    {/* <CardButton title='Rundgange' description='IIm-V7-Imaj7 osv.' route='/ChordIdentification' /> */}
+                    <CardButton title='Extensions' description='Practice hearing various extensions on the dominant chord.' route={ROUTES.Extensions} />
+                    <CardButton title='Inner Hearing'  description='Root note with a given number of random notes on top. Practice your ability to focus your inner hearing.' route={ROUTES.InnerHearing} />
+                    <CardButton title='String of Notes'  description='Practice your memory.' route={ROUTES.InnerHearing} />
                 </Box>
-                {/* <CardButtonKvintCirkel title='Kvintcirklen' description='Et godt værktøj' route='/ChordIdentification' /> */}
             </Box>
         </Fade>
     );

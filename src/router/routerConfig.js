@@ -3,5 +3,5 @@ export const ROUTES = {
     About:'/about',
     Extensions:'/extensions',
     InnerHearing:'/innerhearing',
-    StringOfTones:'/stringoftones'
+    StringOfNotes:'/stringofnotes'
 }
