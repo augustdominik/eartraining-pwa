@@ -2,7 +2,7 @@ import * as React from 'react';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import * as Tone from 'tone';
-import { Button, Fade, Paper, Typography } from '@mui/material';
+import { Button, Fade, Paper, Typography, useTheme } from '@mui/material';
 import * as ChordGenerator from '../utils/ChordGenerator';
 import '../styles/Udvidelser.css';
 import { Box } from '@mui/system';
@@ -46,7 +46,7 @@ const sampler = new Tone.Sampler({
     },
 
     release: 10,
-    volume:1,
+    volume: 1,
 
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
@@ -58,6 +58,8 @@ const playerRightAnwser = new Tone.Player(SoundRightAnswer).toDestination();
 const playerWrongAnswer = new Tone.Player(SoundWrongAnswer).toDestination();
 
 function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToInclude }) {
+
+    const theme = useTheme();
 
     //dominant and tonic
     const [curQuestion, setCurQuestion] = React.useState(0);
@@ -74,9 +76,9 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
     };
 
     const playFeedbackSound = (wasRight) => {
-        if(wasRight){
+        if (wasRight) {
             playerRightAnwser.start(0);
-        }else{
+        } else {
             playerWrongAnswer.start(0);
         }
     }
@@ -122,7 +124,10 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
 
     const answerButtons = chordsToInclude.map((chordSymbol, i) =>
         <Button
-            style={{ textTransform: 'none', "&:hover": 'none'}}
+            sx={{
+                textTransform: 'none',
+                
+            }}
             key={i}
             className='answerButton'
             variant={getButtonVariant(chordSymbol)}
@@ -154,9 +159,9 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
                 >
                     <Typography variant='h5'>Hvad hører du?</Typography>
                     <Box sx={{
-                        display:'grid',
-                        gridTemplateColumns:'1fr 1fr 1fr 1fr',
-                        gap:2
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                        gap: 2
                     }}>
                         {answerButtons}
                     </Box>
@@ -165,7 +170,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
                         onPointerDown={playDominantChord}
                         endIcon={<VolumeUpIcon />}
                         fullWidth={true}
-                        sx={{height:'75px'}}
+                        sx={{ height: '75px' }}
                     >
                         Spil akkord
                     </Button>
@@ -175,7 +180,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
                 <Paper
                     elevation={2}
                     className='footer'
-                    sx={{paddingLeft:2}}
+                    sx={{ paddingLeft: 2 }}
                 >
                     <p>{(1 + curQuestion).toString() + ' / ' + questions.length}</p>
                     <Button

@@ -16,6 +16,7 @@ import { blue } from '@mui/material/colors';
 import PlayFairDisplay from '../assets/Playfair_Display/static/PlayfairDisplay-Regular.ttf';
 import Roboto from '../assets/Roboto/Roboto-Medium.ttf';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mantine/core';
 
 function Root() {
 
@@ -27,8 +28,9 @@ function Root() {
             }
         },
         palette: {
+            mode: 'light',
             primary: {
-                main: blue[200]
+                main: '#29325C'
             }
         },
         components: {
@@ -51,17 +53,6 @@ function Root() {
                 }
             `
             },
-            MuiButton: {
-                styleOverrides: {
-                    contained: {
-                        '@media (hover: none)': {
-                            '&:hover': {
-                                backgroundColor: `${blue[200]} !important`
-                            }
-                        },
-                    }
-                }
-            }
         }
     });
 

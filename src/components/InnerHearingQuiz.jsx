@@ -173,7 +173,6 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
                             onPointerDown={() => playChord()}
                             endIcon={<VolumeUpIcon />}
                             fullWidth={true}
-                            style={{ backgroundColor: 'transparent' }}
                         >
                             Spil akkord
                         </Button>
