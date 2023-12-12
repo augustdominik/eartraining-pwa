@@ -8,7 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NavigateNext from '@mui/icons-material/NavigateNext';
-import MailIcon from '@mui/icons-material/Mail';
 import { Outlet, Link } from 'react-router-dom';
 import './Root.css';
 import PlayFairDisplay from '../assets/Playfair_Display/static/PlayfairDisplay-Regular.ttf';
@@ -128,13 +127,20 @@ function Root() {
         <ThemeProvider theme={theme}>
             <Box className="App" sx={{}}>
                 <IconButton
-                    sx={{ 'alignSelf': 'start', marginTop: 3, marginLeft: 3 }}
+                    // sx={{ 'alignSelf': 'start', marginTop: 3, marginLeft: 3 }}
+                    sx={{
+                        position: 'fixed',
+                        left: 15,
+                        top: 15,
+                        right: 'auto',
+                    }}
                     onClick={toggleDrawer('left', true)}>
                     <MenuIcon />
                 </IconButton>
                 <SwipeableDrawer
                     anchor={'left'}
                     open={state['left']}
+                    onOpen={toggleDrawer('left', true)}
                     onClose={toggleDrawer('left', false)}
                 >
                     {list('left')}

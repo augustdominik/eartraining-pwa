@@ -1,4 +1,8 @@
 import * as Tone from 'tone';
+import samples from '@audio-samples/piano-mp3-velocity10';
+
+function getUrlsFromSamples(){
+}
 
 // PIANO SAMPLER
 const sampler = new Tone.Sampler({

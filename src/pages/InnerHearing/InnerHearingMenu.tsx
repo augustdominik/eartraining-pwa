@@ -18,6 +18,7 @@ export default function InnerHearingMenu({ startQuiz }) {
                     <Box>
                         <Typography>Antal spørgsmål: {numQuestions}</Typography>
                         <Slider className="slider-num-answers"
+                            //@ts-ignore: latterligt
                             onChange={(event) => setNumQuestions(event.target.value)}
                             value={numQuestions}
                             step={1}
@@ -28,6 +29,7 @@ export default function InnerHearingMenu({ startQuiz }) {
                     <Box>
                         <Typography>Antal toner på toppen: {numTopTones}</Typography>
                         <Slider className="slider-num-answers"
+                            //@ts-ignore: slap af
                             onChange={(event) => setNumTopTones(event.target.value)}
                             value={numTopTones}
                             step={1}

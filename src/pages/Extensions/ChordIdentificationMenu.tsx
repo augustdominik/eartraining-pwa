@@ -8,13 +8,16 @@ function loadChordsToIncludeList() {
     const chordsToIncludeList = [];
 
     //If we've saved a chordsToIncludeList, load that
-     // if (localStorage.getItem('chordsToIncludeList') != null) {
-     //     return JSON.parse(localStorage.getItem('chordsToIncludeList'));
-     // }
+    if (localStorage.getItem('chordsToIncludeList') != null) {
+        return JSON.parse(localStorage.getItem('chordsToIncludeList'));
+    }
 
     Object.keys(ChordGenerator.dominantChords).map((keyName, i) => {
         const chordItem = {}
+        //TODO: ryd op i dette baghetti
+        // @ts-ignore
         chordItem.symbol = ChordGenerator.dominantChords[keyName].symbol;
+        // @ts-ignore
         chordItem.include = false;
         chordsToIncludeList.push(chordItem);
     });
@@ -40,7 +43,7 @@ function cleanChordsToIncludeList(chordsToIncludeList) {
 export default function ChordIdentificationMenu({ startQuiz }) {
 
 
-    const [chordsToIncludeList, setChordsToIncludeList] = 
+    const [chordsToIncludeList, setChordsToIncludeList] =
         React.useState(loadChordsToIncludeList());
 
     const [numQuestions, setNumQuestions] = React.useState(15)

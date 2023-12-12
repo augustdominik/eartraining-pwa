@@ -71,7 +71,8 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
                         flexDirection: 'column',
                         justifyContent: 'space-evenly',
                         flex: 1,
-                        padding: 2
+                        marginX:3,
+                        marginTop:5,
                     }}
                 >
 
@@ -102,6 +103,7 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
                             <Typography>Sustain</Typography>
                             <Slider
                                 value={sustainSeconds}
+                                // @ts-ignore 
                                 onChange={(event) => setSustainSeconds(event.target.value)}
                                 min={0.5}
                                 max={10}

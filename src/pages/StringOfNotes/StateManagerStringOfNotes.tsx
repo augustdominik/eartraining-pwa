@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './Udvidelser.css';
 import MenuStringOfTones from './MenuStringOfNotes';
 import GameStringOfNotes from './GameStringOfNotes';
+import { GameSON } from './TypesStringOfNotes';
 
 export default function StateManagerStringOfNotes() {
 
@@ -12,15 +12,10 @@ export default function StateManagerStringOfNotes() {
     }
     //states include: menu, quiz, evaluation
     const [curState, setState] = React.useState(State.Menu);
-    const [questions, setQuestions] = React.useState();
-    const [numTones, setNumTones] = React.useState(3);
+    const [game, setGame] = React.useState<GameSON>();
 
-    function generateQuestions(numQuestions:number){
-        return numQuestions;
-    }
-
-    const startGame = (numQuestions:number, numTones:number) => {
-        setNumTones(numTones);
+    const startGame = (newGame:GameSON) => {
+        setGame(newGame);
         setState(State.Game);
     }
 
@@ -29,10 +24,7 @@ export default function StateManagerStringOfNotes() {
         if (_state === State.Menu) {
             return (<MenuStringOfTones startGame={startGame}/>);
         } else if (_state === State.Game) {
-            return (<GameStringOfNotes
-                questions={questions}
-                numTones={numTones}
-            />);
+            return (<GameStringOfNotes game={game}/>);
         } else if (_state === State.Evaluation) {
             setState(State.Menu);
         } else {
