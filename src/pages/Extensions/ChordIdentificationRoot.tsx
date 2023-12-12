@@ -5,17 +5,26 @@ import ChordIdentificationEvaluation from './ChordIdentificationEvaluation';
 import ChordIdentificationMenu from './ChordIdentificationMenu';
 import ChordIdentificationQuiz from './ChordIdentificationQuiz';
 
+//TODO add this to /common/types
+
+type Question = {
+    chord:Array<string>,
+    answer:string,
+    guess:string
+}
+
 function generateQuestions(numQuestions, chordsToIncludeList) {
 
-    var questions = [];
+    var questions:Array<Question> = [];
 
     for (var i = 0; i < numQuestions; i++) {
-        const question = {};
         const chord =
             ChordGenerator.getDominantTransposed(chordsToIncludeList[Math.floor(chordsToIncludeList.length * Math.random())]);
-        question.chord = chord;
-        question.answer = question.chord.symbol;
-        question.guess = '';
+        const question:Question = {
+            chord:chord,
+            answer:chord.symbol,
+            guess:''
+        }
         questions.push(question);
     }
 
@@ -30,7 +39,9 @@ function ChordIdentificationRoot() {
     const [chordsToInclude, setChordsToInclude] = React.useState([]);
 
 
-    const startQuiz = (numQuestions, chordsToIncludeList) => {
+    // @ts-ignore
+    const startQuiz = (numQuestions:number, chordsToIncludeList) => {
+    // @ts-ignore
         setQuestions(generateQuestions(numQuestions, chordsToIncludeList));
         setChordsToInclude(chordsToIncludeList);
         setState('quiz');
@@ -49,7 +60,7 @@ function ChordIdentificationRoot() {
         } else if (_state === 'evaluation') {
             return(<ChordIdentificationEvaluation questions={questions} setState={setState}/>)
         } else {
-            return (<ChordIdentificationMenu />);
+            return (<ChordIdentificationMenu startQuiz={startQuiz} />);
         }
     }
 

@@ -102,6 +102,7 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
                             <Typography>Sustain</Typography>
                             <Slider
                                 value={sustainSeconds}
+                                // @ts-ignore 
                                 onChange={(event) => setSustainSeconds(event.target.value)}
                                 min={0.5}
                                 max={10}

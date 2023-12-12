@@ -17,6 +17,7 @@ export default function MenuStringOfNotes({ startGame }) {
                     <Box>
                         <Typography>Number of questions: {numQuestions}</Typography>
                         <Slider className="slider-num-answers"
+                            // @ts-ignore: bare grimt
                             onChange={(event) => setNumQuestions(event.target.value)}
                             value={numQuestions}
                             step={1}
@@ -27,6 +28,7 @@ export default function MenuStringOfNotes({ startGame }) {
                     <Box>
                         <Typography>Number of tones at a time: {numTopTones}</Typography>
                         <Slider className="slider-num-answers"
+                            // @ts-ignore: bare grimt
                             onChange={(event) => setNumTopTones(event.target.value)}
                             value={numTopTones}
                             step={1}

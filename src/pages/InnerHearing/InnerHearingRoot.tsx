@@ -4,16 +4,23 @@ import './Udvidelser.css';
 import InnerHearingMenu from './InnerHearingMenu';
 import InnerHearingQuiz from './InnerHearingQuiz';
 
-function generateQuestions(numQuestions) {
+type Question = {
+    chord:Array<string>,
+    answer:string,
+    guess:string
+}
+
+function generateQuestions(numQuestions:number) {
 
     var questions = [];
 
     for (var i = 0; i < numQuestions; i++) {
-        const question = {};
         const chord = ChordGenerator.getInnerHearingChord();
-        question.chord = chord;
-        question.answer = '';
-        question.guess = '';
+        const question:Question = {
+            chord:chord,
+            answer:'',
+            guess:''
+        };
         questions.push(question);
     }
 
@@ -24,16 +31,16 @@ function InnerHearingRoot() {
 
     //states include: menu, quiz, evaluation
     const [curState, setState] = React.useState('menu');
-    const [questions, setQuestions] = React.useState();
+    const [questions, setQuestions] = React.useState<Array<Question>>();
     const [topTones, setTopTones] = React.useState(3);
 
-    const startQuiz = (numQuestions, numTopTones) => {
+    const startQuiz = (numQuestions:number, numTopTones:number) => {
         setTopTones(numTopTones);
         setQuestions(generateQuestions(numQuestions));
         setState('quiz');
     }
 
-    const renderState = (_state) => {
+    const renderState = (_state:string) => {
 
         if (_state === 'menu') {
             return (<InnerHearingMenu startQuiz={startQuiz} />);
@@ -41,7 +48,6 @@ function InnerHearingRoot() {
             return (<InnerHearingQuiz
                 numTopTones={topTones}
                 questions={questions}
-                setQuestions={() => setQuestions}
                 setState={setState}
             />);
         } else if (_state === 'evaluation') {

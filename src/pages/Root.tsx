@@ -8,7 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NavigateNext from '@mui/icons-material/NavigateNext';
-import MailIcon from '@mui/icons-material/Mail';
 import { Outlet, Link } from 'react-router-dom';
 import './Root.css';
 import PlayFairDisplay from '../assets/Playfair_Display/static/PlayfairDisplay-Regular.ttf';
@@ -135,6 +134,7 @@ function Root() {
                 <SwipeableDrawer
                     anchor={'left'}
                     open={state['left']}
+                    onOpen={toggleDrawer('left', true)}
                     onClose={toggleDrawer('left', false)}
                 >
                     {list('left')}
