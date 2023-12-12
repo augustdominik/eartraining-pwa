@@ -71,7 +71,8 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
                         flexDirection: 'column',
                         justifyContent: 'space-evenly',
                         flex: 1,
-                        padding: 2
+                        marginX:3,
+                        marginTop:5,
                     }}
                 >
 

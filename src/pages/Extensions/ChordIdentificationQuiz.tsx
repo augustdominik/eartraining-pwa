@@ -110,7 +110,8 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         flex: 1,
-                        padding: 2
+                        marginX:3,
+                        marginTop:8
                     }}
                 >
                     <Typography variant='h5'>Hvad hører du?</Typography>
@@ -126,7 +127,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
                         onPointerDown={playDominantChord}
                         endIcon={<VolumeUpIcon />}
                         fullWidth={true}
-                        sx={{ height: '75px' }}
+                        sx={{ height: '75px', marginBottom:5 }}
                     >
                         Spil akkord
                     </Button>

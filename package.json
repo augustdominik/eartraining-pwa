@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@audio-samples/piano-mp3-velocity10": "^1.0.5",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.19",
+    "@mui/lab": "^5.0.0-alpha.155",
     "@mui/material": "^5.14.20",
     "@tonaljs/tonal": "^4.10.0",
     "react": "^18.2.0",

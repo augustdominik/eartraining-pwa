@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardContent, Divider, Fade, Typography } from "@mui/material";
+import { Box, Button, Card, CardActionArea, CardContent, Divider, Fade, Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
 import { ROUTES } from "../../router/routerConfig";
 
@@ -16,12 +16,12 @@ function CardButton({ title, description, route }) {
 }
 
 
-export default function Hjem() {
+export default function Home() {
     return (
         <Fade in={true}>
-            <Box sx={{marginX:3, marginTop:3}}>
+            <Box sx={{marginX:3, marginTop:8}}>
                 <Box sx={{ marginBottom: 3 }}>
-                    <Typography variant="h4">Welcome back, Chief of Hearing!</Typography>
+                    <Typography variant="h4">Welcome back, <br/> Chief of Hearing!</Typography>
                 </Box>
                 <Divider sx={{ marginBottom: 3 }} />
                 <Box
@@ -33,7 +33,7 @@ export default function Hjem() {
                     }}>
                     <CardButton title='Extensions' description='Practice hearing various extensions on the dominant chord.' route={ROUTES.Extensions} />
                     <CardButton title='Inner Hearing'  description='Root note with a given number of random notes on top. Practice your ability to focus your inner hearing.' route={ROUTES.InnerHearing} />
-                    <CardButton title='String of Notes'  description='Practice your memory.' route={ROUTES.InnerHearing} />
+                    <CardButton title='String of Notes'  description='Practice your memory.' route={ROUTES.StringOfNotes} />
                 </Box>
             </Box>
         </Fade>

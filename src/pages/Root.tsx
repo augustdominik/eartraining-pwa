@@ -127,7 +127,13 @@ function Root() {
         <ThemeProvider theme={theme}>
             <Box className="App" sx={{}}>
                 <IconButton
-                    sx={{ 'alignSelf': 'start', marginTop: 3, marginLeft: 3 }}
+                    // sx={{ 'alignSelf': 'start', marginTop: 3, marginLeft: 3 }}
+                    sx={{
+                        position: 'fixed',
+                        left: 15,
+                        top: 15,
+                        right: 'auto',
+                    }}
                     onClick={toggleDrawer('left', true)}>
                     <MenuIcon />
                 </IconButton>

@@ -1,5 +1,6 @@
 import { Midi, Note } from '@tonaljs/tonal';
 import { cloneDeep, wrap } from 'lodash';
+import { getRandomInt } from './CommonUtils';
 
 export const dominantChords = {
     seventh: {
@@ -121,12 +122,6 @@ export function getDominantTransposed(chordSymbol) {
     //const transposedChord = chord.voicings.forEach(voicing => transposeChord(voicing,transposeBySemitones));
     chord.voicings = chord.voicings.map((voicing) => transposeChord(voicing, transposeBySemitones));
     return chord;
-}
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
 export function getInnerHearingChord(numTopTones) {
