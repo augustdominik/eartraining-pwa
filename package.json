@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.155",
     "@mui/material": "^5.14.20",
     "@tonaljs/tonal": "^4.10.0",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.20.1",
