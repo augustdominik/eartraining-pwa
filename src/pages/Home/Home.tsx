@@ -34,6 +34,7 @@ export default function Home() {
                     <CardButton title='Extensions' description='Practice hearing various extensions on the dominant chord.' route={ROUTES.Extensions} />
                     <CardButton title='Inner Hearing'  description='Root note with a given number of random notes on top. Practice your ability to focus your inner hearing.' route={ROUTES.InnerHearing} />
                     <CardButton title='String of Notes'  description='Practice your memory.' route={ROUTES.StringOfNotes} />
+                    <CardButton title='Mode Explorer'  description='Explore the sound of different modes.' route={ROUTES.ModeExplorer} />
                 </Box>
             </Box>
         </Fade>

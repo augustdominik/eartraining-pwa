@@ -8,6 +8,7 @@ import InnerHearingRoot from './pages/InnerHearing/InnerHearingRoot';
 import Home from './pages/Home/Home';
 import Root from './pages/Root';
 import StateManagerStringOfNotes from './pages/StringOfNotes/StateManagerStringOfNotes';
+import ModeExploerer from './pages/Modes/ModeExplorer';
 
 
 const router = createHashRouter([
@@ -31,7 +32,11 @@ const router = createHashRouter([
             {
                 path:ROUTES.StringOfNotes,
                 element: <StateManagerStringOfNotes/> 
-            }
+            },
+            {
+                path:ROUTES.ModeExplorer,
+                element: <ModeExploerer/> 
+            },
         ]
     },
 ]);

@@ -27,7 +27,10 @@ function Root() {
         palette: {
             mode: 'light',
             primary: {
-                main: '#29325C'
+                main: '#90d0ff',
+            },
+            secondary: {
+                main: '#ffc090'
             }
         },
         components: {
@@ -106,6 +109,14 @@ function Root() {
                             {<NavigateNext />}
                         </ListItemIcon>
                         <ListItemText primary={<Typography style={{ 'color': '#000' }}>String of Notes</Typography>} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding component={Link} to={ROUTES.ModeExplorer}>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            {<NavigateNext />}
+                        </ListItemIcon>
+                        <ListItemText primary={<Typography style={{ 'color': '#000' }}>Mode Explorer</Typography>} />
                     </ListItemButton>
                 </ListItem>
             </List>
