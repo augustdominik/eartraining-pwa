@@ -4,7 +4,7 @@ import PauseIcon from '@mui/icons-material/Pause';
 import React from "react";
 import { Box, Divider, Fab, Fade, FormControl, MenuItem, Select, Slider, Typography } from "@mui/material";
 import PianoSampler from '../../utils/PianoSampler'
-import { MODES, Mode, Solfege, getNextNote } from './ModeUtils';
+import { MODES, Mode, Solfege, getNextNote, solfegeToNote } from './ModeUtils';
 import { getRandomNumber } from '../../utils/CommonUtils';
 
 export default function ModeExplorer() {
@@ -12,12 +12,13 @@ export default function ModeExplorer() {
     const [curMode, setMode] = React.useState<Mode>(MODES.Ionian);
     const [noteQueue, setNoteQueue] = React.useState<Array<ScheduledNote>>([]);
     const [play, setPlay] = React.useState<boolean>(false);
+    const [rootNote, setRootNote] = React.useState<string>('c3');
     
     const [timeBetweenNotesRange, setTimeBetweenNotesRange] = React.useState<number[]>([0.2, 1])
 
     type ScheduledNote = {
         time: number
-        note: string
+        note: Solfege
     }
 
     React.useEffect(()=>{
@@ -30,14 +31,14 @@ export default function ModeExplorer() {
     },[play])
 
     function startModeExplorer(){
-        addNoteToQueue(frameTime, '');
+        addNoteToQueue(frameTime, Solfege.Do);
     }
 
     function stopModeExplorer(){
         setNoteQueue([]);
     }
 
-    function addNoteToQueue(currentTime: number, prevNote: string) {
+    function addNoteToQueue(currentTime: number, prevNote: Solfege) {
         setNoteQueue([...noteQueue,
         {
             time: currentTime + getRandomNumber(timeBetweenNotesRange[0], timeBetweenNotesRange[1]) * 1000,
@@ -54,7 +55,7 @@ export default function ModeExplorer() {
             if (noteQueue[0].time <= time) {
                 const note = noteQueue.shift()
                 addNoteToQueue(time, note.note);
-                playNote(note.note);
+                playNote(solfegeToNote(note.note, rootNote));
             }
         }
     }
@@ -165,14 +166,6 @@ export default function ModeExplorer() {
                             color="primary"
                         >
                             {play ? <PauseIcon /> : <PlayArrowIcon />}
-                        </Fab>
-                        <Fab
-                            onClick={() =>{console.log(getNextNote(Solfege.Do, MODES.Ionian))}}
-                            sx={{
-                            }}
-                            color="primary"
-                        >
-                            test
                         </Fab>
                     </Box>
                 </Box>

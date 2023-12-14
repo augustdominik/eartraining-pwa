@@ -1,3 +1,4 @@
+import { Note } from "@tonaljs/tonal";
 import { getRandomNumber } from "../../utils/CommonUtils";
 
 export enum Solfege {
@@ -30,6 +31,7 @@ export const MODES: { [key: string]: Mode } = {
         name: 'Ionian',
         probabilities: {
             [Solfege.Do]: {
+                [Solfege.Do]: 0,
                 [Solfege.Re]: 1 / 6,
                 [Solfege.Mi]: 1 / 6,
                 [Solfege.Fa]: 1 / 6,
@@ -39,6 +41,7 @@ export const MODES: { [key: string]: Mode } = {
             },
             [Solfege.Re]: {
                 [Solfege.Do]: 1 / 6,
+                [Solfege.Re]: 0,
                 [Solfege.Mi]: 1 / 6,
                 [Solfege.Fa]: 1 / 6,
                 [Solfege.So]: 1 / 6,
@@ -48,6 +51,7 @@ export const MODES: { [key: string]: Mode } = {
             [Solfege.Mi]: {
                 [Solfege.Do]: 1 / 6,
                 [Solfege.Re]: 1 / 6,
+                [Solfege.Mi]: 0,
                 [Solfege.Fa]: 1 / 6,
                 [Solfege.So]: 1 / 6,
                 [Solfege.La]: 1 / 6,
@@ -57,6 +61,7 @@ export const MODES: { [key: string]: Mode } = {
                 [Solfege.Do]: 1 / 6,
                 [Solfege.Re]: 1 / 6,
                 [Solfege.Mi]: 1 / 6,
+                [Solfege.Fa]: 0,
                 [Solfege.So]: 1 / 6,
                 [Solfege.La]: 1 / 6,
                 [Solfege.Ti]: 1 / 6,
@@ -66,6 +71,7 @@ export const MODES: { [key: string]: Mode } = {
                 [Solfege.Re]: 1 / 6,
                 [Solfege.Mi]: 1 / 6,
                 [Solfege.Fa]: 1 / 6,
+                [Solfege.So]: 0,
                 [Solfege.La]: 1 / 6,
                 [Solfege.Ti]: 1 / 6,
             },
@@ -75,6 +81,7 @@ export const MODES: { [key: string]: Mode } = {
                 [Solfege.Mi]: 1 / 6,
                 [Solfege.Fa]: 1 / 6,
                 [Solfege.So]: 1 / 6,
+                [Solfege.La]: 0,
                 [Solfege.Ti]: 1 / 6,
             },
             [Solfege.Ti]: {
@@ -84,9 +91,15 @@ export const MODES: { [key: string]: Mode } = {
                 [Solfege.Fa]: 1 / 6,
                 [Solfege.So]: 1 / 6,
                 [Solfege.La]: 1 / 6,
+                [Solfege.Ti]: 0,
             },
         }
     },
+}
+
+export function solfegeToNote(solfege:Solfege, root:string):string{
+    console.log(Solfege[solfege]);
+    return Note.fromMidi(Note.midi(root) + solfege);
 }
 
 type Entries<T> = {
@@ -102,7 +115,7 @@ export function getNextNote(previousNote: Solfege, mode: Mode): Solfege {
     for (let i = 0; i < entries.length; i++) {
         acc += entries[i][1];
         if (roll <= acc) {
-            return Solfege[parseInt(entries[i][0])];
+            return parseInt(entries[i][0]);
         }
     }
 
