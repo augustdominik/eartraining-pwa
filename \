@@ -1,0 +1,122 @@
+import * as Tone from 'tone';
+import React from "react";
+import { Box, Divider, Fab, Fade, MenuItem, Select, Typography } from "@mui/material";
+import PianoSampler from '../../utils/PianoSampler'
+import { MODES, Mode } from './ModeUtils';
+import { SelectItem } from '@ui-kitten/components';
+
+export default function ModeExploerer() {
+
+    const [curMode, setMode] = React.useState<Mode>(MODES.Ionian);
+
+    const [noteQueue, setNoteQueue] = React.useState<Array<ScheduledNote>>([]);
+
+    type ScheduledNote = {
+        time:number
+        callback:Function,
+    }
+
+    function addNoteToQueue(time:number){
+        setNoteQueue([...noteQueue, 
+            {time:time + 1*1000,
+            callback: () => {PianoSampler.triggerAttackRelease('a4', '1n')}}])
+    }
+
+    function handleNoteQueue(time: number) {
+        if (noteQueue.length != 0) {
+            if(noteQueue[0].time <= time){
+                console.log(noteQueue.at(0).time, ', ', time, ' stack: ', noteQueue)
+                noteQueue.shift().callback();
+            }
+        }
+    }
+
+    const [frameTime, setFrameTime] = React.useState();
+    React.useEffect(() => {
+        let frameId
+        const frame = (time) => {
+            setFrameTime(time);
+            frameId = requestAnimationFrame(frame);
+            handleNoteQueue(time);
+        }
+        requestAnimationFrame(frame);
+        return () => cancelAnimationFrame(frameId);
+    }, [noteQueue]);
+
+    return (
+        <Fade in={true}>
+            <Box>
+                <Box sx={{
+                    position: 'fixed',
+                    left: 'auto',
+                    right: 40,
+                    top: 'auto',
+                    bottom: 40,
+                    margin: '0 auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    <Fab
+                        sx={{
+                        }}
+                        color="primary"
+                        onClick={async ()=>{await Tone.start()}}
+                    >
+                        Start Tone
+                    </Fab>
+
+                    <Fab
+                        sx={{
+                        }}
+                        color="primary"
+                        onClick={() => addNoteToQueue(frameTime)}
+                    >
+                        Add note to queue
+                    </Fab>
+                </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: 1,
+                        alignSelf: 'stretch',
+                        justifyContent: 'space-between'
+                    }}>
+                    <Box
+                        sx={{
+                            alignSelf: 'center'
+                        }}>
+                        <Typography
+                            variant="h4"
+                            sx={{
+                                alignSelf: 'center',
+                                marginTop: 4
+                            }}>
+                            Mode Explorer
+                        </Typography>
+                        <Divider />
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: 3
+                        }}
+                    >
+                        <Select
+                            value={curMode}
+                            //onChange={}
+                        >
+                            {Object.entries(MODES).map((mode) => 
+                                <MenuItem></MenuItem>
+                            )}
+                        </Select>
+                    </Box>
+                </Box>
+            </Box>
+        </Fade>
+    );
+}
