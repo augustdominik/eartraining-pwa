@@ -10,12 +10,12 @@ type Question = {
     guess:string
 }
 
-function generateQuestions(numQuestions:number) {
+function generateQuestions(numQuestions:number, numTopTones:number) {
 
     var questions = [];
 
     for (var i = 0; i < numQuestions; i++) {
-        const chord = ChordGenerator.getInnerHearingChord();
+        const chord = ChordGenerator.getInnerHearingChord(numTopTones);
         const question:Question = {
             chord:chord,
             answer:'',
@@ -36,7 +36,7 @@ function InnerHearingRoot() {
 
     const startQuiz = (numQuestions:number, numTopTones:number) => {
         setTopTones(numTopTones);
-        setQuestions(generateQuestions(numQuestions));
+        setQuestions(generateQuestions(numQuestions, numTopTones));
         setState('quiz');
     }
 

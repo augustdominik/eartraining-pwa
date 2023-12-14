@@ -124,7 +124,7 @@ export function getDominantTransposed(chordSymbol) {
     return chord;
 }
 
-export function getInnerHearingChord(numTopTones) {
+export function getInnerHearingChord(numTopTones:number) {
 
     const chord = [];
 
