@@ -87,23 +87,23 @@ export default function ModeExplorer() {
                     flexDirection: 'column',
                     alignItems: 'center'
                 }}>
-                    <Fab
-                        sx={{
-                        }}
-                        color="primary"
-                        onClick={async () => { await Tone.start() }}
-                    >
-                        Start Tone
-                    </Fab>
+                    {/* <Fab */}
+                    {/*     sx={{ */}
+                    {/*     }} */}
+                    {/*     color="primary" */}
+                    {/*     onClick={async () => { await Tone.start() }} */}
+                    {/* > */}
+                    {/*     Start Tone */}
+                    {/* </Fab> */}
 
-                    <Fab
-                        sx={{
-                        }}
-                        color="primary"
-                        // onClick={() => addNoteToQueue(frameTime)}
-                    >
-                        Add note to queue
-                    </Fab>
+                    {/* <Fab */}
+                    {/*     sx={{ */}
+                    {/*     }} */}
+                    {/*     color="primary" */}
+                    {/*     // onClick={() => addNoteToQueue(frameTime)} */}
+                    {/* > */}
+                    {/*     Add note to queue */}
+                    {/* </Fab> */}
                 </Box>
                 <Box
                     sx={{
@@ -147,7 +147,7 @@ export default function ModeExplorer() {
                             </Select>
                         </FormControl>
                         <Slider
-                            sx={{width:300}}
+                            sx={{width:300, mt:6, mb:4}}
                             value={timeBetweenNotesRange}
                             onChange={(event:Event, newValue: number | number[]) => {
                                 setTimeBetweenNotesRange(newValue as number[]);
