@@ -4,7 +4,8 @@ import PauseIcon from '@mui/icons-material/Pause';
 import React from "react";
 import { Box, Divider, Fab, Fade, FormControl, MenuItem, Select, Slider, Typography } from "@mui/material";
 import PianoSampler from '../../utils/PianoSampler'
-import { MODES, Mode, Solfege, getNextNote, solfegeToNote } from './ModeUtils';
+import { MODES,  getNextNote, solfegeNoteToAbsoluteNote } from './ModeUtils';
+import { Mode, SolfegeNote, ScheduledNote, Solfege } from './ModeTypes'
 import { getRandomNumber } from '../../utils/CommonUtils';
 
 export default function ModeExplorer() {
@@ -12,14 +13,10 @@ export default function ModeExplorer() {
     const [curMode, setMode] = React.useState<Mode>(MODES.Ionian);
     const [noteQueue, setNoteQueue] = React.useState<Array<ScheduledNote>>([]);
     const [play, setPlay] = React.useState<boolean>(false);
-    const [rootNote, setRootNote] = React.useState<string>('c3');
+    const [rootNote, setRootNote] = React.useState<string>('c2');
     
     const [timeBetweenNotesRange, setTimeBetweenNotesRange] = React.useState<number[]>([0.2, 1])
 
-    type ScheduledNote = {
-        time: number
-        note: Solfege
-    }
 
     React.useEffect(()=>{
         if(play){
@@ -31,18 +28,18 @@ export default function ModeExplorer() {
     },[play])
 
     function startModeExplorer(){
-        addNoteToQueue(frameTime, Solfege.Do);
+        addNoteToQueue(frameTime, {solfege: Solfege.Do, octave: 4});
     }
 
     function stopModeExplorer(){
         setNoteQueue([]);
     }
 
-    function addNoteToQueue(currentTime: number, prevNote: Solfege) {
+    function addNoteToQueue(currentTime: number, prevSolfegeNote: SolfegeNote) {
         setNoteQueue([...noteQueue,
         {
             time: currentTime + getRandomNumber(timeBetweenNotesRange[0], timeBetweenNotesRange[1]) * 1000,
-            note: getNextNote(prevNote, curMode),
+            note: getNextNote(prevSolfegeNote, curMode),
         }])
     }
 
@@ -53,9 +50,10 @@ export default function ModeExplorer() {
     function handleNoteQueue(time: number) {
         if (noteQueue.length != 0) {
             if (noteQueue[0].time <= time) {
-                const note = noteQueue.shift()
-                addNoteToQueue(time, note.note);
-                playNote(solfegeToNote(note.note, rootNote));
+                const scheduledNote = noteQueue.shift()
+                addNoteToQueue(time, scheduledNote.note);
+
+                getRandomNumber(0, 1) <= 0.15 ? playNote(rootNote) : playNote(solfegeNoteToAbsoluteNote(scheduledNote.note, rootNote));
             }
         }
     }
@@ -87,23 +85,6 @@ export default function ModeExplorer() {
                     flexDirection: 'column',
                     alignItems: 'center'
                 }}>
-                    {/* <Fab */}
-                    {/*     sx={{ */}
-                    {/*     }} */}
-                    {/*     color="primary" */}
-                    {/*     onClick={async () => { await Tone.start() }} */}
-                    {/* > */}
-                    {/*     Start Tone */}
-                    {/* </Fab> */}
-
-                    {/* <Fab */}
-                    {/*     sx={{ */}
-                    {/*     }} */}
-                    {/*     color="primary" */}
-                    {/*     // onClick={() => addNoteToQueue(frameTime)} */}
-                    {/* > */}
-                    {/*     Add note to queue */}
-                    {/* </Fab> */}
                 </Box>
                 <Box
                     sx={{

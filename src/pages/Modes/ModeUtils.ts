@@ -1,122 +1,51 @@
 import { Note } from "@tonaljs/tonal";
 import { getRandomNumber } from "../../utils/CommonUtils";
+import { ionianProbabilities } from "./ModeProbabilities/ionian";
+import { Mode, SolfegeNote, Solfege } from "./ModeTypes";
+import { dorianProbabilites } from "./ModeProbabilities/dorian";
+import { harmonicMinorSharpFour } from "./ModeProbabilities/harmonicMinorSharpFour";
 
-export enum Solfege {
-    Do = 1,
-    Ra,
-    Re,
-    Me,
-    Mi,
-    Fa,
-    Fi,
-    So,
-    Le,
-    La,
-    Te,
-    Ti
-}
-
-export type NextNoteProbabilities = { [key in Solfege]?: number };
-
-export type ModeProbabilities = { [key in Solfege]?: NextNoteProbabilities };
-
-export type Mode = {
-    name: string,
-    probabilities: ModeProbabilities;
-}
-
-//TODO: du mangler do 
 export const MODES: { [key: string]: Mode } = {
     Ionian: {
         name: 'Ionian',
-        probabilities: {
-            [Solfege.Do]: {
-                [Solfege.Do]: 0,
-                [Solfege.Re]: 1 / 6,
-                [Solfege.Mi]: 1 / 6,
-                [Solfege.Fa]: 1 / 6,
-                [Solfege.So]: 1 / 6,
-                [Solfege.La]: 1 / 6,
-                [Solfege.Ti]: 1 / 6,
-            },
-            [Solfege.Re]: {
-                [Solfege.Do]: 1 / 6,
-                [Solfege.Re]: 0,
-                [Solfege.Mi]: 1 / 6,
-                [Solfege.Fa]: 1 / 6,
-                [Solfege.So]: 1 / 6,
-                [Solfege.La]: 1 / 6,
-                [Solfege.Ti]: 1 / 6,
-            },
-            [Solfege.Mi]: {
-                [Solfege.Do]: 1 / 6,
-                [Solfege.Re]: 1 / 6,
-                [Solfege.Mi]: 0,
-                [Solfege.Fa]: 1 / 6,
-                [Solfege.So]: 1 / 6,
-                [Solfege.La]: 1 / 6,
-                [Solfege.Ti]: 1 / 6,
-            },
-            [Solfege.Fa]: {
-                [Solfege.Do]: 1 / 6,
-                [Solfege.Re]: 1 / 6,
-                [Solfege.Mi]: 1 / 6,
-                [Solfege.Fa]: 0,
-                [Solfege.So]: 1 / 6,
-                [Solfege.La]: 1 / 6,
-                [Solfege.Ti]: 1 / 6,
-            },
-            [Solfege.So]: {
-                [Solfege.Do]: 1 / 6,
-                [Solfege.Re]: 1 / 6,
-                [Solfege.Mi]: 1 / 6,
-                [Solfege.Fa]: 1 / 6,
-                [Solfege.So]: 0,
-                [Solfege.La]: 1 / 6,
-                [Solfege.Ti]: 1 / 6,
-            },
-            [Solfege.La]: {
-                [Solfege.Do]: 1 / 6,
-                [Solfege.Re]: 1 / 6,
-                [Solfege.Mi]: 1 / 6,
-                [Solfege.Fa]: 1 / 6,
-                [Solfege.So]: 1 / 6,
-                [Solfege.La]: 0,
-                [Solfege.Ti]: 1 / 6,
-            },
-            [Solfege.Ti]: {
-                [Solfege.Do]: 1 / 6,
-                [Solfege.Re]: 1 / 6,
-                [Solfege.Mi]: 1 / 6,
-                [Solfege.Fa]: 1 / 6,
-                [Solfege.So]: 1 / 6,
-                [Solfege.La]: 1 / 6,
-                [Solfege.Ti]: 0,
-            },
-        }
+        probabilities: ionianProbabilities
     },
+    Dorian: {
+        name: 'Dorian',
+        probabilities: dorianProbabilites
+    }, 
+    HarmonicMinorSharpFour: {
+        name: 'HarmonicMinorSharpFour',
+        probabilities: harmonicMinorSharpFour
+    }
 }
 
-export function solfegeToNote(solfege:Solfege, root:string):string{
-    console.log(Solfege[solfege]);
-    return Note.fromMidi(Note.midi(root) + solfege);
+export function solfegeNoteToAbsoluteNote(solfegeNote: SolfegeNote, root: string): string {
+    const absoluteNote = Note.pitchClass(Note.fromMidi(Note.midi(root) + solfegeNote.solfege - 1)) + solfegeNote.octave.toString();
+    console.log(absoluteNote);
+    return absoluteNote; 
+}
+
+//TODO: perhaps find a mathimatical function for calculating
+//probabilities
+export function getOctave(prevSolfegeNote: SolfegeNote): number {
+    return prevSolfegeNote.octave;
 }
 
 type Entries<T> = {
     [K in keyof T]: [K, T[K]];
 }[keyof T][];
 
-export function getNextNote(previousNote: Solfege, mode: Mode): Solfege {
+export function getNextNote(prevSolfegeNote: SolfegeNote, mode: Mode): SolfegeNote {
     const roll = getRandomNumber(0.0, 1.0);
 
-    const entries = Object.entries(mode.probabilities[previousNote]) as Entries<object>;
+    const entries = Object.entries(mode.probabilities[prevSolfegeNote.solfege]) as Entries<object>;
 
     let acc = 0;
     for (let i = 0; i < entries.length; i++) {
         acc += entries[i][1];
         if (roll <= acc) {
-            return parseInt(entries[i][0]);
+            return { solfege: parseInt(entries[i][0]), octave: getOctave(prevSolfegeNote) };
         }
     }
-
 }
