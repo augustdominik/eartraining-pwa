@@ -45,7 +45,7 @@ const sampler = new Tone.Sampler({
     baseUrl: "https://tonejs.github.io/audio/salamander/"
 }).toDestination();
 
-const reverb = new Tone.Reverb(5);
-sampler.chain(reverb, Tone.Destination);
+// const reverb = new Tone.Reverb(5);
+// sampler.chain(reverb, Tone.Destination);
 
 export default sampler;
