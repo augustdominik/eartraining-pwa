@@ -15,11 +15,10 @@ export default function ModeExplorer() {
     const [play, setPlay] = React.useState<boolean>(false);
     const [rootNote, setRootNote] = React.useState<string>('c2');
     
-    const [timeBetweenNotesRange, setTimeBetweenNotesRange] = React.useState<number[]>([0.2, 1])
+    const [timeBetweenNotesRange, setTimeBetweenNotesRange] = React.useState<number[]>([0.2, 2.5])
     const pianoSampler = React.useRef(null);
 
     React.useEffect(()=>{
-        console.log('setup');
         pianoSampler.current = PianoSampler;
     },[]);
 
@@ -50,7 +49,7 @@ export default function ModeExplorer() {
     }
 
     function playNote(note:string){
-        pianoSampler.current.triggerAttackRelease(note, '1n')
+        pianoSampler.current.triggerAttackRelease(note, '1m', '1m', getRandomNumber(0.4, 0.9))
     }
 
     function handleNoteQueue(time: number) {
@@ -59,7 +58,7 @@ export default function ModeExplorer() {
                 const scheduledNote = noteQueue.shift()
                 addNoteToQueue(time, scheduledNote.note);
 
-                getRandomNumber(0, 1) <= 0.15 ? playNote(rootNote) : playNote(solfegeNoteToAbsoluteNote(scheduledNote.note, rootNote));
+                getRandomNumber(0, 1) <= 0.05 ? playNote(rootNote) : playNote(solfegeNoteToAbsoluteNote(scheduledNote.note, rootNote));
             }
         }
     }

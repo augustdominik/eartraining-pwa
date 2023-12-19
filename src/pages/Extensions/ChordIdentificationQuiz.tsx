@@ -33,7 +33,7 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
         const triggerAttackTime = random(0.01, 0.07);
 
         questions[curQuestion].chord.voicings[0].map((note, idx) => {
-            pianoSampler.current.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
+            pianoSampler.current.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 0.8);
         })
         //sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
     };
