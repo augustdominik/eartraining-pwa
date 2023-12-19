@@ -29,17 +29,22 @@ export function solfegeNoteToAbsoluteNote(solfegeNote: SolfegeNote, root: string
 //TODO: perhaps find a mathimatical function for calculating
 //probabilities
 export function getOctave(prevSolfegeNote: SolfegeNote): number {
+    const roll = getRandomNumber(0.0, 1.0);
+
+    if(roll < 0.2){
+        return prevSolfegeNote.octave <= 3 ? prevSolfegeNote.octave + 1 : prevSolfegeNote.octave - 1;
+    }else if( roll < 0.4 ) {
+        return prevSolfegeNote.octave >= 6 ? prevSolfegeNote.octave - 1 : prevSolfegeNote.octave + 1;
+    }
     return prevSolfegeNote.octave;
 }
-
-type Entries<T> = {
-    [K in keyof T]: [K, T[K]];
-}[keyof T][];
 
 export function getNextNote(prevSolfegeNote: SolfegeNote, mode: Mode): SolfegeNote {
     const roll = getRandomNumber(0.0, 1.0);
 
-    const entries = Object.entries(mode.probabilities[prevSolfegeNote.solfege]) as Entries<object>;
+    console.log(prevSolfegeNote);
+    const entries = Object.entries(mode.probabilities[prevSolfegeNote.solfege]);
+
 
     let acc = 0;
     for (let i = 0; i < entries.length; i++) {

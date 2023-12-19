@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">August\'s Eartrainer</string>
+    <string name="title_activity_main">August\'s Eartrainer</string>
+    <string name="package_name">com.adrp.eartrainer</string>
+    <string name="custom_url_scheme">com.adrp.eartrainer</string>
+</resources>

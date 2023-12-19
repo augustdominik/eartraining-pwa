@@ -49,7 +49,7 @@ export default function ModeExplorer() {
     }
 
     function playNote(note:string){
-        pianoSampler.current.triggerAttackRelease(note, '1m', '1m', getRandomNumber(0.4, 0.9))
+        pianoSampler.current.triggerAttackRelease(note, '1m', Tone.now(), getRandomNumber(0.4, 0.9))
     }
 
     function handleNoteQueue(time: number) {
