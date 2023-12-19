@@ -16,6 +16,12 @@ export default function ModeExplorer() {
     const [rootNote, setRootNote] = React.useState<string>('c2');
     
     const [timeBetweenNotesRange, setTimeBetweenNotesRange] = React.useState<number[]>([0.2, 1])
+    const pianoSampler = React.useRef(null);
+
+    React.useEffect(()=>{
+        console.log('setup');
+        pianoSampler.current = PianoSampler;
+    },[]);
 
 
     React.useEffect(()=>{
@@ -44,7 +50,7 @@ export default function ModeExplorer() {
     }
 
     function playNote(note:string){
-        PianoSampler.triggerAttackRelease(note, '1n')
+        pianoSampler.current.triggerAttackRelease(note, '1n')
     }
 
     function handleNoteQueue(time: number) {

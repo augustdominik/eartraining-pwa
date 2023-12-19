@@ -21,12 +21,19 @@ function ChordIdentificationQuiz({ questions, setQuestions, setState, chordsToIn
     const [curQuestion, setCurQuestion] = React.useState(0);
     const [questionAnswered, setQuestionAnswered] = React.useState(false);
 
+    const pianoSampler = React.useRef(null);
+
+    React.useEffect(()=>{
+        console.log('setup');
+        pianoSampler.current = PianoSampler;
+    },[]);
+
     const playDominantChord = () => {
 
         const triggerAttackTime = random(0.01, 0.07);
 
         questions[curQuestion].chord.voicings[0].map((note, idx) => {
-            PianoSampler.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
+            pianoSampler.current.triggerAttackRelease(note, '1n', `+${idx * triggerAttackTime}`, 1.2);
         })
         //sampler.triggerAttackRelease(questions[curQuestion].chord.voicings[0], '2n');
     };

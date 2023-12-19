@@ -16,6 +16,13 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
     const [toneDelay, setToneDelay] = React.useState(0.03);
     const [sustainSeconds, setSustainSeconds] = React.useState(7.0);
 
+    const pianoSampler = React.useRef(null);
+
+    React.useEffect(()=>{
+        console.log('setup');
+        pianoSampler.current = PianoSampler;
+    },[]);
+
     const playChord = () => {
 
         chord.map((note, idx) => {
@@ -25,7 +32,7 @@ function InnerHearingQuiz({ questions, setState, numTopTones }) {
     };
 
     const playRootNote = () => {
-        PianoSampler.triggerAttackRelease(chord[0], '1n');
+        pianoSampler.current.triggerAttackRelease(chord[0], '1n');
     };
 
     const nextQuestion = (event) => {
